@@ -7,10 +7,10 @@ import '../../styles/index.scss';
 // == Composant
 const Calendar = () => {
   const [year, setYear] = useState(new Date().getFullYear());
-  const [month, setMonth] = useState(new Date().getMonth());
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [daysInMonth, setDaysInMonth] = useState(0);
   const [date, setDate] = useState(new Date().getDate());
-
+  const [chosenDay, setChosenDay] = useState(Date.parse(year, month, date));
   // Display previous month
 
   const getPrevDate = () => {
@@ -46,6 +46,8 @@ const Calendar = () => {
         setDate={setDate}
         year={year}
         month={month}
+        chosenDay={chosenDay}
+        setChosenDay={setChosenDay}
       />
       <Scheduler
         getPrevDate={getPrevDate}
@@ -56,6 +58,8 @@ const Calendar = () => {
         setDate={setDate}
         year={year}
         month={month}
+        chosenDay={chosenDay}
+        setChosenDay={setChosenDay}
       />
     </div>
   );

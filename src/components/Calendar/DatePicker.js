@@ -12,11 +12,11 @@ const DatePicker = ({
   year,
   month,
   date,
-  // setDate,
   daysInMonth,
   setDaysInMonth,
   getNextDate,
   getPrevDate,
+  setChosenDay,
 }) => {
   // Number of Days in Month
 
@@ -55,16 +55,14 @@ const DatePicker = ({
 
   const days = [];
   const start = new Date(year, month - 1);
-  const dayOfWeek = start.getDay();
+  const end = new Date(year, month, 0);
+  const dayOfWeekStart = start.getDay();
+  const dayOfWeekEnd = end.getDay();
 
-  const lessDays = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
-  const moreDays = dayOfWeek < 6 ? 5 - dayOfWeek : 6;
+  const lessDays = dayOfWeekStart === 0 ? 6 : dayOfWeekStart - 1;
+  const moreDays = dayOfWeekEnd === 0 ? -1 : 6 - dayOfWeekEnd;
 
-  const totalDays = daysInMonth === 31
-    ? daysInMonth + lessDays + moreDays
-    : daysInMonth + lessDays + moreDays + 1;
-
-  for (let i = 0; i < totalDays; i++) {
+  for (let i = -1; i < daysInMonth + lessDays + moreDays; i++) {
     const weekDay = new Date(
       new Date(year, month - 1, date + i).setDate(
         new Date(year, month - 1, date + i).getDate() - lessDays,
@@ -74,16 +72,18 @@ const DatePicker = ({
   }
 
   const dayList = (day) => (
-    <div
+    <button
       key={day}
+      type="button"
+      onClick={() => setChosenDay(day)}
       className={
-              new Date(day).getMonth() + 1 === month
-                ? 'datepicker-content-item'
-                : 'datepicker-content-item out'
-          }
+                new Date(day).getMonth() + 1 === month
+                  ? 'datepicker-content-item'
+                  : 'datepicker-content-item out'
+            }
     >
       {new Date(day).toLocaleDateString('fr-FR', { day: 'numeric' })}
-    </div>
+    </button>
   );
 
   return (
@@ -121,8 +121,7 @@ const DatePicker = ({
         <div>Sam</div>
         <div>Dim</div>
       </div>
-      <div className="datepicker-content">{days.map(dayList)}
-      </div>
+      <div className="datepicker-content">{days.map(dayList)}</div>
     </div>
   );
 };
@@ -133,9 +132,9 @@ DatePicker.propTypes = {
   month: PropTypes.number.isRequired,
   date: PropTypes.number.isRequired,
   getNextDate: PropTypes.func.isRequired,
-  // setDate: PropTypes.func.isRequired,
   daysInMonth: PropTypes.number.isRequired,
   setDaysInMonth: PropTypes.func.isRequired,
+  setChosenDay: PropTypes.func.isRequired,
 };
 
 export default DatePicker;

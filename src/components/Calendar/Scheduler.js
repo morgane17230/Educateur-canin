@@ -13,12 +13,12 @@ import 'src/styles/scheduler.scss';
 const Scheduler = ({
   year,
   month,
-  date,
   setDate,
   daysInMonth,
   setDaysInMonth,
   getNextDate,
   getPrevDate,
+  chosenDay,
 }) => {
   // const [displayMonth, setDisplayMonth] = useState(false);
   // const [displayWeek, setDisplayWeek] = useState(false);
@@ -83,7 +83,7 @@ const Scheduler = ({
 
   const weekDays = [];
   const dayHours = [];
-  const currentDate = new Date(year, month - 1, date);
+  const currentDate = new Date(chosenDay);
   const currentDay = currentDate.getDay();
   const lessDays = currentDay === 0 ? 6 : currentDay - 1;
   for (let h = 8; h < 19; h++) {
@@ -91,13 +91,18 @@ const Scheduler = ({
   }
   for (let i = 0; i < 7; i++) {
     const weekDay = new Date(
-      new Date(year, month - 1, date + i).setDate(
-        new Date(year, month - 1, date + i).getDate() - lessDays,
+      new Date(
+        year,
+        currentDate.getMonth(),
+        currentDate.getDate() + i,
+      ).setDate(
+        new Date(
+          year,
+          currentDate.getMonth(),
+          currentDate.getDate() + i,
+        ).getDate() - lessDays,
       ),
-    ).toLocaleDateString('fr-FR', {
-      weekday: 'long',
-      day: 'numeric',
-    });
+    );
     weekDays.push(weekDay);
   }
 
@@ -108,8 +113,18 @@ const Scheduler = ({
   );
 
   const weekDayList = (weekDay, index) => (
-    <div key={index} className="scheduler-content-item">
-      <div className="scheduler-content-header">{weekDay}</div>
+    <div
+      key={index}
+      className={
+              Date.parse(weekDay) === chosenDay
+                ? 'scheduler-content-header-item active'
+                : 'scheduler-content-header-item'
+          }
+    >
+      {new Date(weekDay).toLocaleDateString('fr-FR', {
+        weekday: 'long',
+        day: 'numeric',
+      })}
     </div>
   );
 
@@ -151,12 +166,12 @@ const Scheduler = ({
         </button>
       </div>
       <div className="scheduler-content">
-        <div className="scheduler-content-header">Heures</div>
-        {weekDays.map(weekDayList)}
+        <div className="scheduler-content-header">
+          <div className="scheduler-content-header-item">Heures</div>
+          {weekDays.map(weekDayList)}
+        </div>
       </div>
-      <div>
-        {dayHours.map(weekHoursList)}
-      </div>
+      <div>{dayHours.map(weekHoursList)}</div>
     </div>
   );
 };
@@ -166,10 +181,10 @@ Scheduler.propTypes = {
   getPrevDate: PropTypes.func.isRequired,
   month: PropTypes.number.isRequired,
   getNextDate: PropTypes.func.isRequired,
-  date: PropTypes.number.isRequired,
   setDate: PropTypes.func.isRequired,
   daysInMonth: PropTypes.number.isRequired,
   setDaysInMonth: PropTypes.func.isRequired,
+  chosenDay: PropTypes.number.isRequired,
 };
 
 export default Scheduler;

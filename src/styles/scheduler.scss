@@ -26,11 +26,22 @@
         display: flex;
         &-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
+            text-align: center;
+            width: 100%;
+            padding: 1rem;
+            &-item {
+                width: calc(100% / 8);
+            }
         }
         &-item {
             width: calc(100% / 8);
             height: calc(95vh / 23);
         }
     }
+}
+
+.active {
+    background-color: grey;
+    color: white;
 }
