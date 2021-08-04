@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-alert */
 /* eslint-disable no-plusplus */
 import React from 'react';
 import PropTypes from 'prop-types';

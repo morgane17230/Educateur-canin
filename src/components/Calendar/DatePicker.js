@@ -11,7 +11,6 @@ import 'src/styles/datepicker.scss';
 const DatePicker = ({
   year,
   month,
-  date,
   daysInMonth,
   setDaysInMonth,
   getNextDate,
@@ -130,7 +129,6 @@ DatePicker.propTypes = {
   year: PropTypes.number.isRequired,
   getPrevDate: PropTypes.func.isRequired,
   month: PropTypes.number.isRequired,
-  date: PropTypes.number.isRequired,
   getNextDate: PropTypes.func.isRequired,
   daysInMonth: PropTypes.number.isRequired,
   setDaysInMonth: PropTypes.func.isRequired,
