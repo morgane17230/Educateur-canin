@@ -10,7 +10,7 @@ const Calendar = () => {
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [daysInMonth, setDaysInMonth] = useState(0);
   const [date, setDate] = useState(new Date().getDate());
-  const [chosenDay, setChosenDay] = useState(Date.parse(year, month, date));
+  const [chosenDay, setChosenDay] = useState(Date.now());
   // Display previous month
 
   const getPrevDate = () => {

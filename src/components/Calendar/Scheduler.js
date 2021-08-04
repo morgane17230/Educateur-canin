@@ -124,6 +124,7 @@ const Scheduler = ({
       {new Date(weekDay).toLocaleDateString('fr-FR', {
         weekday: 'long',
         day: 'numeric',
+        month: 'long',
       })}
     </div>
   );

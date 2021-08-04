@@ -60,12 +60,12 @@ const DatePicker = ({
   const dayOfWeekEnd = end.getDay();
 
   const lessDays = dayOfWeekStart === 0 ? 6 : dayOfWeekStart - 1;
-  const moreDays = dayOfWeekEnd === 0 ? -1 : 6 - dayOfWeekEnd;
+  const moreDays = dayOfWeekEnd === 0 ? 0 : 7 - dayOfWeekEnd;
 
-  for (let i = -1; i < daysInMonth + lessDays + moreDays; i++) {
+  for (let i = 0; i < daysInMonth + lessDays + moreDays; ++i) {
     const weekDay = new Date(
-      new Date(year, month - 1, date + i).setDate(
-        new Date(year, month - 1, date + i).getDate() - lessDays,
+      new Date(year, month - 1, start.getDate() + i).setDate(
+        new Date(year, month - 1, start.getDate() + i).getDate() - lessDays,
       ),
     );
     days.push(Date.parse(weekDay));
