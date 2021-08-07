@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 /* eslint-disable no-plusplus */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -79,51 +80,52 @@ const Scheduler = ({
 
   // week display
 
-  const weekDays = [];
   const dayHours = [];
+  const weekDays = ['Heures'];
   const currentDate = new Date(chosenDay);
   const currentDay = currentDate.getDay();
   const lessDays = currentDay === 0 ? 6 : currentDay - 1;
-  for (let h = 8; h < 19; h++) {
-    dayHours.push(h, `${h}h30`);
-  }
-  for (let i = 0; i < 7; i++) {
-    const weekDay = new Date(
-      new Date(
-        year,
-        currentDate.getMonth(),
-        currentDate.getDate() + i,
-      ).setDate(
-        new Date(
-          year,
-          currentDate.getMonth(),
-          currentDate.getDate() + i,
-        ).getDate() - lessDays,
-      ),
-    );
-    weekDays.push(weekDay);
+  for (let h = 8; h <= 18; h++) {
+    for (let m = 0; m < 4; m++) {
+      dayHours.push(
+        new Date(new Date(Date.now()).setHours(h)).setMinutes(m * 15),
+      );
+      for (let i = 0; i < 7; i++) {
+        const weekDay = new Date(
+          new Date(
+            year,
+            currentDate.getMonth(),
+            currentDate.getDate() + i,
+          ).setDate(
+            new Date(
+              year,
+              currentDate.getMonth(),
+              currentDate.getDate() + i,
+            ).getDate() - lessDays,
+          ),
+        );
+        weekDay.setHours(h);
+        weekDay.setMinutes(15 * m);
+        dayHours.push(weekDay);
+        weekDays.push(weekDay.toLocaleDateString('fr-FR', { day: 'numeric', weekday: 'long' }));
+      }
+    }
   }
 
-  const weekHoursList = (weekHour, index) => (
-    <div key={index} className="scheduler-content-hour">
-      <div className="scheduler-content-item">{weekHour}</div>
-    </div>
-  );
-
-  const weekDayList = (weekDay, index) => (
+  const weekHoursList = (weekDay, index) => (
     <div
       key={index}
-      className={
-              Date.parse(weekDay) === chosenDay
-                ? 'scheduler-content-header-item active'
-                : 'scheduler-content-header-item'
-          }
+      value={Date.parse(weekDay)}
+      className="scheduler-content-item "
     >
-      {new Date(weekDay).toLocaleDateString('fr-FR', {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long',
-      })}
+      {new Date(weekDay).getHours()}h{new Date(weekDay).getMinutes()}
+    </div>
+  );
+  const weekDaysCopy = [...new Set(weekDays)];
+
+  const weekDayList = (weekDay, index) => (
+    <div key={index} className="scheduler-content-item">
+      {weekDay}
     </div>
   );
 
@@ -164,13 +166,10 @@ const Scheduler = ({
           <Icon path={mdiChevronRight} title="next date" size={1} />
         </button>
       </div>
-      <div className="scheduler-content">
-        <div className="scheduler-content-header">
-          <div className="scheduler-content-header-item">Heures</div>
-          {weekDays.map(weekDayList)}
-        </div>
+      <div className="scheduler-content-header">
+        {weekDaysCopy.map(weekDayList)}
       </div>
-      <div>{dayHours.map(weekHoursList)}</div>
+      <div className="scheduler-content">{dayHours.map(weekHoursList)}</div>
     </div>
   );
 };
