@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-plusplus */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@mdi/react';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
@@ -19,9 +19,27 @@ const Scheduler = ({
   getPrevDate,
   chosenDay,
 }) => {
-  // const [displayMonth, setDisplayMonth] = useState(false);
-  // const [displayWeek, setDisplayWeek] = useState(false);
-  // const [displayDay, setDisplayDay] = useState(false);
+  const [displayMonth, setDisplayMonth] = useState(false);
+  const [displayWeek, setDisplayWeek] = useState(false);
+  const [displayDay, setDisplayDay] = useState(false);
+
+  const onDisplayWeek = () => {
+    setDisplayWeek(true);
+    setDisplayMonth(false);
+    setDisplayDay(false);
+  };
+
+  const onDisplayMonth = () => {
+    setDisplayWeek(false);
+    setDisplayMonth(true);
+    setDisplayDay(false);
+  };
+
+  const onDisplayDay = () => {
+    setDisplayWeek(false);
+    setDisplayMonth(false);
+    setDisplayDay(true);
+  };
 
   // Number of Days in Month
 
@@ -118,7 +136,10 @@ const Scheduler = ({
       value={Date.parse(weekDay)}
       className="scheduler-content-item "
     >
-      {new Date(weekDay).getHours()}h{new Date(weekDay).getMinutes()}
+      {new Date(weekDay).getHours()}h
+      {new Date(weekDay).getMinutes() === 0
+        ? null
+        : new Date(weekDay).getMinutes()}
     </div>
   );
   const weekDaysCopy = [...new Set(weekDays)];
@@ -147,13 +168,25 @@ const Scheduler = ({
           {year}
         </span>
         <div className="scheduler-header-choice">
-          <button aria-label="day" type="button">
+          <button
+            aria-label="day"
+            type="button"
+            onClick={onDisplayDay}
+          >
             Jour
           </button>
-          <button aria-label="week" type="button">
+          <button
+            aria-label="week"
+            type="button"
+            onClick={onDisplayWeek}
+          >
             Semaine
           </button>
-          <button aria-label="month" type="button">
+          <button
+            aria-label="month"
+            type="button"
+            onClick={onDisplayMonth}
+          >
             Mois
           </button>
         </div>
@@ -169,7 +202,17 @@ const Scheduler = ({
       <div className="scheduler-content-header">
         {weekDaysCopy.map(weekDayList)}
       </div>
-      <div className="scheduler-content">{dayHours.map(weekHoursList)}</div>
+      {displayWeek && (
+      <div className="scheduler-content">
+        {dayHours.map(weekHoursList)}
+      </div>
+      )}
+      {displayDay && (
+      <div className="scheduler-content">Affichage du jour</div>
+      )}
+      {displayMonth && (
+      <div className="scheduler-content">Affichage du mois</div>
+      )}
     </div>
   );
 };
