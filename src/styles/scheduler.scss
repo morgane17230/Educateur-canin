@@ -10,12 +10,12 @@
     flex-direction: column;
     width: 80%;
     border: 1px solid black;
-    height: fit-content;
+
     &-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border: 1px solid black;
+        border-bottom: 1px solid black;
         padding: 1rem 0;
         button {
             background-color: transparent;
@@ -24,39 +24,33 @@
     }
     &-content {
         display: flex;
-        flex-wrap: wrap;
+        height: 100vh;
+        overflow-y: scroll;
         &-header {
             display: flex;
-        }
-        &-prime{
-               background-color: aqua; 
-               width: calc(100% / 8);
+            &-item {
+                width: 100%;
+                padding: 1rem 0;
+                text-align: center;
+                border-bottom: 1px solid transparent; 
             }
-        &-item {
-            display: flex;
-            width: calc(100% / 8);
-            height: auto;
-            border: 1px solid black;
-            justify-content: center;
-            padding: 1rem 0;
-            &-prime{
+        }
+        &-hours {
             display: flex;
             flex-direction: column;
             width: calc(100% / 7);
-            height: auto;
-            border: 1px solid black;
-            justify-content: center;
-            padding: 1rem 0;
-            }
         }
+        &-item {
+            padding: 2rem 0 1rem 0;
+            text-align: center;
+            border-bottom: 1px solid rgb(160, 160, 160); 
+        }
+        &-weekdays {
+                text-align: center;
+                border-bottom: 1px solid rgb(160, 160, 160);
+                padding: 1rem 0 2.5rem 0;
+            }
     }
 }
 
-.active {
-    background-color: grey;
-    color: white;
-}
 
-.hidden {
-   visibility: hidden;
-}

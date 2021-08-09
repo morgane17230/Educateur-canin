@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@mdi/react';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
+import Week from './Week';
+import Month from './Month';
+import Day from './Day';
 
 // StyleSheet
 
@@ -18,9 +21,10 @@ const Scheduler = ({
   getNextDate,
   getPrevDate,
   chosenDay,
+  setChosenDay,
 }) => {
   const [displayMonth, setDisplayMonth] = useState(false);
-  const [displayWeek, setDisplayWeek] = useState(false);
+  const [displayWeek, setDisplayWeek] = useState(true);
   const [displayDay, setDisplayDay] = useState(false);
 
   const onDisplayWeek = () => {
@@ -76,80 +80,6 @@ const Scheduler = ({
     }
   }
 
-  // month display
-
-  const monthArray = [];
-
-  for (let i = 1; i < daysInMonth + 1; i++) {
-    monthArray.push(
-      <button
-        type="button"
-        key={i}
-        className="scheduler-content-item"
-        onClick={() => setDate(i)}
-      >
-        {new Date(year, month - 1, i).toLocaleDateString('fr-FR', {
-          weekday: 'long',
-          day: 'numeric',
-        })}
-      </button>,
-    );
-  }
-
-  // week display
-
-  const dayHours = [];
-  const weekDays = ['Heures'];
-  const currentDate = new Date(chosenDay);
-  const currentDay = currentDate.getDay();
-  const lessDays = currentDay === 0 ? 6 : currentDay - 1;
-  for (let h = 8; h <= 18; h++) {
-    for (let m = 0; m < 4; m++) {
-      dayHours.push(
-        new Date(new Date(Date.now()).setHours(h)).setMinutes(m * 15),
-      );
-      for (let i = 0; i < 7; i++) {
-        const weekDay = new Date(
-          new Date(
-            year,
-            currentDate.getMonth(),
-            currentDate.getDate() + i,
-          ).setDate(
-            new Date(
-              year,
-              currentDate.getMonth(),
-              currentDate.getDate() + i,
-            ).getDate() - lessDays,
-          ),
-        );
-        weekDay.setHours(h);
-        weekDay.setMinutes(15 * m);
-        dayHours.push(weekDay);
-        weekDays.push(weekDay.toLocaleDateString('fr-FR', { day: 'numeric', weekday: 'long' }));
-      }
-    }
-  }
-
-  const weekHoursList = (weekDay, index) => (
-    <div
-      key={index}
-      value={Date.parse(weekDay)}
-      className="scheduler-content-item "
-    >
-      {new Date(weekDay).getHours()}h
-      {new Date(weekDay).getMinutes() === 0
-        ? null
-        : new Date(weekDay).getMinutes()}
-    </div>
-  );
-  const weekDaysCopy = [...new Set(weekDays)];
-
-  const weekDayList = (weekDay, index) => (
-    <div key={index} className="scheduler-content-item">
-      {weekDay}
-    </div>
-  );
-
   return (
     <div className="scheduler">
       <div className="scheduler-header">
@@ -167,12 +97,9 @@ const Scheduler = ({
           ).toLocaleDateString('fr-FR', { month: 'long' })}{' '}
           {year}
         </span>
+
         <div className="scheduler-header-choice">
-          <button
-            aria-label="day"
-            type="button"
-            onClick={onDisplayDay}
-          >
+          <button aria-label="day" type="button" onClick={onDisplayDay}>
             Jour
           </button>
           <button
@@ -199,19 +126,32 @@ const Scheduler = ({
           <Icon path={mdiChevronRight} title="next date" size={1} />
         </button>
       </div>
-      <div className="scheduler-content-header">
-        {weekDaysCopy.map(weekDayList)}
-      </div>
       {displayWeek && (
-      <div className="scheduler-content">
-        {dayHours.map(weekHoursList)}
-      </div>
+      <Week
+        setDate={setDate}
+        daysInMonth={daysInMonth}
+        chosenDay={chosenDay}
+        year={year}
+        month={month}
+      />
       )}
       {displayDay && (
-      <div className="scheduler-content">Affichage du jour</div>
+      <Day
+        setDate={setDate}
+        daysInMonth={daysInMonth}
+        chosenDay={chosenDay}
+        year={year}
+        month={month}
+      />
       )}
       {displayMonth && (
-      <div className="scheduler-content">Affichage du mois</div>
+      <Month
+        daysInMonth={daysInMonth}
+        chosenDay={chosenDay}
+        year={year}
+        month={month}
+        setChosenDay={setChosenDay}
+      />
       )}
     </div>
   );
@@ -226,6 +166,7 @@ Scheduler.propTypes = {
   daysInMonth: PropTypes.number.isRequired,
   setDaysInMonth: PropTypes.func.isRequired,
   chosenDay: PropTypes.number.isRequired,
+  setChosenDay: PropTypes.func.isRequired,
 };
 
 export default Scheduler;
