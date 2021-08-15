@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 import React, { useState } from 'react';
 import DatePicker from './DatePicker';
 import Scheduler from './Scheduler';
@@ -6,40 +7,40 @@ import '../../styles/index.scss';
 
 // == Composant
 const Calendar = () => {
-  const [year, setYear] = useState(new Date().getFullYear());
-  const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const [chosenDay, setChosenDay] = useState(new Date());
+  const year = new Date(chosenDay).getFullYear();
+  const month = new Date(chosenDay).getMonth();
   const [daysInMonth, setDaysInMonth] = useState(0);
   const [date, setDate] = useState(new Date().getDate());
-  const [chosenDay, setChosenDay] = useState(Date.now());
+  const [weekNumber, setWeekNumber] = useState(Math.floor(
+    ((new Date(chosenDay) - new Date(year, 0, 1)) / 86400000
+            + new Date(chosenDay).getDay() - 1)
+        / 7,
+  ));
+
   // Display previous month
 
-  const getPrevDate = () => {
-    if (month <= 1) {
-      setYear(year - 1);
-      setMonth(12);
-    }
-    else {
-      setMonth(month - 1);
-    }
+  const getPrevMonth = () => {
+    setChosenDay(
+      new Date(
+        year,
+        month - 1,
+        1,
+      ),
+    );
   };
 
   // Display next month
 
-  const getNextDate = () => {
-    if (month >= 12) {
-      setMonth(1);
-      setYear(year + 1);
-    }
-    else {
-      setMonth(month + 1);
-    }
+  const getNextMonth = () => {
+    setChosenDay(new Date(year, month + 1, 1));
   };
 
   return (
     <div className="app">
       <DatePicker
-        getPrevDate={getPrevDate}
-        getNextDate={getNextDate}
+        getPrevMonth={getPrevMonth}
+        getNextMonth={getNextMonth}
         daysInMonth={daysInMonth}
         setDaysInMonth={setDaysInMonth}
         date={date}
@@ -50,16 +51,18 @@ const Calendar = () => {
         setChosenDay={setChosenDay}
       />
       <Scheduler
-        getPrevDate={getPrevDate}
-        getNextDate={getNextDate}
         daysInMonth={daysInMonth}
         setDaysInMonth={setDaysInMonth}
+        getPrevMonth={getPrevMonth}
+        getNextMonth={getNextMonth}
         date={date}
         setDate={setDate}
         year={year}
         month={month}
         chosenDay={chosenDay}
         setChosenDay={setChosenDay}
+        weekNumber={weekNumber}
+        setWeekNumber={setWeekNumber}
       />
     </div>
   );

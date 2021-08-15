@@ -13,27 +13,31 @@ const DatePicker = ({
   month,
   daysInMonth,
   setDaysInMonth,
-  getNextDate,
-  getPrevDate,
+  getNextMonth,
+  getPrevMonth,
+  chosenDay,
   setChosenDay,
 }) => {
   // Number of Days in Month
 
-  if (month <= 7) {
-    if (month % 2 === 0) {
+  if (month + 1 < 8) {
+    if (month + 1 === 8) {
+      setDaysInMonth(31);
+    }
+    else if ((month + 1) % 2 === 0) {
       setDaysInMonth(30);
     }
     else {
       setDaysInMonth(31);
     }
   }
-  else if (month % 2 === 1) {
+  else if ((month + 1) % 2 === 1) {
     setDaysInMonth(30);
   }
   else {
     setDaysInMonth(31);
   }
-  if (month === 2) {
+  if (month + 1 === 2) {
     if (year % 4 === 0) {
       if (year % 100 === 0) {
         if (year % 400 === 0) {
@@ -53,8 +57,9 @@ const DatePicker = ({
   }
 
   const days = [];
-  const start = new Date(year, month - 1);
-  const end = new Date(year, month, 0);
+  const start = new Date(year, month);
+  const end = new Date(year,
+    month + 1, 0);
   const dayOfWeekStart = start.getDay();
   const dayOfWeekEnd = end.getDay();
 
@@ -63,26 +68,31 @@ const DatePicker = ({
 
   for (let i = 0; i < daysInMonth + lessDays + moreDays; ++i) {
     const weekDay = new Date(
-      new Date(year, month - 1, start.getDate() + i).setDate(
-        new Date(year, month - 1, start.getDate() + i).getDate() - lessDays,
+      new Date(
+        year,
+        month,
+        start.getDate() + i,
+      ).setDate(
+        new Date(year,
+          month, start.getDate() + i).getDate() - lessDays,
       ),
     );
     days.push(Date.parse(weekDay));
   }
 
   const dayList = (day) => (
-    <button
+    <div
       key={day}
       type="button"
       onClick={() => setChosenDay(day)}
       className={
-                new Date(day).getMonth() + 1 === month
-                  ? 'datepicker-content-item'
-                  : 'datepicker-content-item out'
-            }
+              new Date(day).getMonth() === month
+                ? 'datepicker-content-item'
+                : 'datepicker-content-item out'
+          }
     >
       {new Date(day).toLocaleDateString('fr-FR', { day: 'numeric' })}
-    </button>
+    </div>
   );
 
   return (
@@ -92,21 +102,20 @@ const DatePicker = ({
           className="prevyear"
           aria-label="previous year"
           type="button"
-          onClick={getPrevDate}
+          onClick={getPrevMonth}
         >
           <Icon path={mdiChevronLeft} title="next date" size={1} />
         </button>
-        <span>
+        <div>
           {new Date(
-            Date.UTC(year, month, 0, 0, 0, 0),
-          ).toLocaleDateString('fr-FR', { month: 'long' })}{' '}
-          {year}
-        </span>
+            chosenDay,
+          ).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })}{' '}
+        </div>
         <button
           className="next-year"
           aria-label="next year"
           type="button"
-          onClick={getNextDate}
+          onClick={getNextMonth}
         >
           <Icon path={mdiChevronRight} title="next date" size={1} />
         </button>
@@ -127,9 +136,10 @@ const DatePicker = ({
 
 DatePicker.propTypes = {
   year: PropTypes.number.isRequired,
-  getPrevDate: PropTypes.func.isRequired,
+  getPrevMonth: PropTypes.func.isRequired,
   month: PropTypes.number.isRequired,
-  getNextDate: PropTypes.func.isRequired,
+  chosenDay: PropTypes.instanceOf(Date).isRequired,
+  getNextMonth: PropTypes.func.isRequired,
   daysInMonth: PropTypes.number.isRequired,
   setDaysInMonth: PropTypes.func.isRequired,
   setChosenDay: PropTypes.func.isRequired,

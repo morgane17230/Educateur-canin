@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 import 'src/styles/scheduler.scss';
 
-const Scheduler = ({ year, chosenDay }) => {
+const Scheduler = ({ year, chosenDay, month }) => {
   // week display
 
   const dayHours = [[], [], [], [], [], [], []];
@@ -21,7 +21,7 @@ const Scheduler = ({ year, chosenDay }) => {
         const weekDay = new Date(
           new Date(
             year,
-            currentDate.getMonth(),
+            month,
             currentDate.getDate() + i,
           ).setDate(
             new Date(
@@ -39,7 +39,11 @@ const Scheduler = ({ year, chosenDay }) => {
   }
 
   const weekHourList = (hour, index) => (
-    <div key={`hour-${index}`} className="scheduler-content-item" value={hour} />
+    <div
+      key={`hour-${index}`}
+      className="scheduler-content-item"
+      onClick={() => console.log(new Date(hour))}
+    />
   );
 
   const weekDaysList = (dayHour, index) => (
@@ -79,7 +83,8 @@ const Scheduler = ({ year, chosenDay }) => {
 
 Scheduler.propTypes = {
   year: PropTypes.number.isRequired,
-  chosenDay: PropTypes.number.isRequired,
+  month: PropTypes.number.isRequired,
+  chosenDay: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default Scheduler;

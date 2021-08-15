@@ -16,8 +16,8 @@ const Scheduler = ({
   // month display
 
   const days = [];
-  const start = new Date(year, month - 1);
-  const end = new Date(year, month, 0);
+  const start = new Date(year, month);
+  const end = new Date(year, month + 1, 0);
   const dayOfWeekStart = start.getDay();
   const dayOfWeekEnd = end.getDay();
 
@@ -26,32 +26,37 @@ const Scheduler = ({
 
   for (let i = 0; i < daysInMonth + lessDays + moreDays; ++i) {
     const weekDay = new Date(
-      new Date(year, month - 1, start.getDate() + i).setDate(
-        new Date(year, month - 1, start.getDate() + i).getDate()
-                  - lessDays,
+      new Date(year, month, start.getDate() + i).setDate(
+        new Date(year, month, start.getDate() + i).getDate() - lessDays,
       ),
     );
     days.push(Date.parse(weekDay));
   }
 
   const dayList = (day) => (
-    <button
+    <div
       key={day}
       type="button"
-      onClick={() => setChosenDay(day)}
+      onClick={() => {
+        setChosenDay(new Date(day));
+        console.log(new Date(day));
+      }}
       className={
-                 new Date(day).getMonth() + 1 === month
-                   ? 'datepicker-content-item'
-                   : 'datepicker-content-item out'
-             }
+              new Date(day).getMonth() === month
+                ? 'scheduler-content-month-item'
+                : 'scheduler-content-month-item out'
+          }
     >
-      {new Date(day).toLocaleDateString('fr-FR', { day: 'numeric' })}
-    </button>
+      {new Date(day).toLocaleDateString('fr-FR', {
+        weekday: 'short',
+        day: 'numeric',
+      })}
+    </div>
   );
 
   return (
     <>
-      <div>{ days.map(dayList) }</div>
+      <div className="scheduler-content-month">{ days.map(dayList) }</div>
     </>
 
   );

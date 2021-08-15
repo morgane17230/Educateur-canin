@@ -10,14 +10,19 @@
     top: 0;
     flex-direction: column;
     width: 20%;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     height: fit-content;
     &-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border: 1px solid black;
-        padding: 1rem 0;
+        border-bottom: 1px solid black;
+        div {
+            display: flex;
+                text-align: center;
+                padding: 1rem 0;
+                justify-content: space-between;
+            }
         button {
             background-color: transparent;
             border: none;
@@ -42,6 +47,9 @@
             align-items: center;
             background-color: transparent;
             border: none;
+            &:hover {
+                    background-color: rgb(146, 135, 105);
+                }
             &.out {
                 color: rgba(0, 0, 0, 0.315);
             }
