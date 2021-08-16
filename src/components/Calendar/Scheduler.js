@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-plusplus */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@mdi/react';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
@@ -15,11 +15,9 @@ import 'src/styles/scheduler.scss';
 const Scheduler = ({
   year,
   month,
-  weekNumber,
   setDate,
   daysInMonth,
   setDaysInMonth,
-  setWeekNumber,
   chosenDay,
   setChosenDay,
   getPrevMonth,
@@ -43,8 +41,7 @@ const Scheduler = ({
 
   const getPrevDate = () => {
     if (displayWeek) {
-      setChosenDay(weekStart - 86400000 * 5);
-      setWeekNumber(weekNumber - 1);
+      setChosenDay(new Date(Date.parse(weekStart) - 86400000 * 7));
     }
     else if (displayMonth) {
       getPrevMonth();
@@ -57,9 +54,8 @@ const Scheduler = ({
   const getNextDate = () => {
     if (displayWeek) {
       setChosenDay(
-        new Date(new Date(chosenDay).getTime() + 86400000 * moreDay),
+        new Date(new Date(chosenDay).getTime() + 86400000 * (moreDay + 1)),
       );
-      setWeekNumber(weekNumber + 1);
     }
     else if (displayMonth) {
       getNextMonth();
@@ -91,41 +87,42 @@ const Scheduler = ({
 
   // Number of Days in Month
 
-  if (month + 1 < 8) {
-    if (month + 1 === 8) {
-      setDaysInMonth(31);
-    }
-    else if ((month + 1) % 2 === 0) {
-      setDaysInMonth(30);
-    }
-    else {
-      setDaysInMonth(31);
-    }
-  }
-  else if ((month + 1) % 2 === 1) {
-    setDaysInMonth(30);
-  }
-  else {
-    setDaysInMonth(31);
-  }
-  if (month + 1 === 2) {
-    if (year % 4 === 0) {
-      if (year % 100 === 0) {
-        if (year % 400 === 0) {
-          setDaysInMonth(28);
+  useEffect(() => {
+    if ((month + 1) <= 7) {
+      if ((month + 1) === 2) {
+        if (year % 4 === 0) {
+          if (year % 100 === 0) {
+            if (year % 400 === 0) {
+              setDaysInMonth(28);
+            }
+            else {
+              setDaysInMonth(29);
+            }
+          }
+          else {
+            setDaysInMonth(29);
+          }
         }
         else {
-          setDaysInMonth(29);
+          setDaysInMonth(28);
         }
       }
+      else if ((month + 1) % 2 === 0) {
+        setDaysInMonth(30);
+      }
       else {
-        setDaysInMonth(29);
+        setDaysInMonth(31);
       }
     }
-    else {
-      setDaysInMonth(28);
+    else if ((month + 1) > 7) {
+      if ((month + 1) % 2 === 0) {
+        setDaysInMonth(31);
+      }
+      else {
+        setDaysInMonth(30);
+      }
     }
-  }
+  }, [month]);
 
   return (
     <div className="scheduler">
@@ -153,7 +150,17 @@ const Scheduler = ({
                 year: 'numeric',
               })}{' '}
             </div>
-            <div>Semaine {weekNumber}</div>
+            <div>
+              Semaine{' '}
+              {Math.floor(
+                ((Date.parse(weekStart)
+                                      - Date.parse(year, 0, 1))
+                                      / 86400000
+                                      + new Date(weekStart).getDay()
+                                      - 1)
+                                      / 7 + 1,
+              )}
+            </div>
           </>
           )}
           {displayMonth && (
@@ -208,6 +215,7 @@ const Scheduler = ({
         chosenDay={chosenDay}
         year={year}
         month={month}
+        setChosenDay={setChosenDay}
       />
       )}
       {displayDay && (
@@ -240,8 +248,6 @@ Scheduler.propTypes = {
   setDaysInMonth: PropTypes.func.isRequired,
   chosenDay: PropTypes.instanceOf(Date).isRequired,
   setChosenDay: PropTypes.func.isRequired,
-  weekNumber: PropTypes.number.isRequired,
-  setWeekNumber: PropTypes.func.isRequired,
   getPrevMonth: PropTypes.func.isRequired,
   getNextMonth: PropTypes.func.isRequired,
 };

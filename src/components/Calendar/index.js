@@ -12,11 +12,6 @@ const Calendar = () => {
   const month = new Date(chosenDay).getMonth();
   const [daysInMonth, setDaysInMonth] = useState(0);
   const [date, setDate] = useState(new Date().getDate());
-  const [weekNumber, setWeekNumber] = useState(Math.floor(
-    ((new Date(chosenDay) - new Date(year, 0, 1)) / 86400000
-            + new Date(chosenDay).getDay() - 1)
-        / 7,
-  ));
 
   // Display previous month
 
@@ -61,8 +56,6 @@ const Calendar = () => {
         month={month}
         chosenDay={chosenDay}
         setChosenDay={setChosenDay}
-        weekNumber={weekNumber}
-        setWeekNumber={setWeekNumber}
       />
     </div>
   );

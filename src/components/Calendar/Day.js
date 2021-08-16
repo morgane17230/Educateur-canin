@@ -43,7 +43,7 @@ const Scheduler = ({
 };
 
 Scheduler.propTypes = {
-  chosenDay: PropTypes.instanceOf(Date).isRequired,
+  chosenDay: PropTypes.number.isRequired,
 };
 
 export default Scheduler;

@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 /* eslint-disable no-plusplus */
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@mdi/react';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
@@ -19,44 +20,45 @@ const DatePicker = ({
   setChosenDay,
 }) => {
   // Number of Days in Month
-
-  if (month + 1 < 8) {
-    if (month + 1 === 8) {
-      setDaysInMonth(31);
-    }
-    else if ((month + 1) % 2 === 0) {
-      setDaysInMonth(30);
-    }
-    else {
-      setDaysInMonth(31);
-    }
-  }
-  else if ((month + 1) % 2 === 1) {
-    setDaysInMonth(30);
-  }
-  else {
-    setDaysInMonth(31);
-  }
-  if (month + 1 === 2) {
-    if (year % 4 === 0) {
-      if (year % 100 === 0) {
-        if (year % 400 === 0) {
-          setDaysInMonth(28);
+  useEffect(() => {
+    if ((month + 1) <= 7) {
+      if ((month + 1) === 2) {
+        if (year % 4 === 0) {
+          if (year % 100 === 0) {
+            if (year % 400 === 0) {
+              setDaysInMonth(28);
+            }
+            else {
+              setDaysInMonth(29);
+            }
+          }
+          else {
+            setDaysInMonth(29);
+          }
         }
         else {
-          setDaysInMonth(29);
+          setDaysInMonth(28);
         }
       }
+      else if ((month + 1) % 2 === 0) {
+        setDaysInMonth(30);
+      }
       else {
-        setDaysInMonth(29);
+        setDaysInMonth(31);
       }
     }
-    else {
-      setDaysInMonth(28);
+    else if ((month + 1) > 8) {
+      if ((month + 1) % 2 === 0) {
+        setDaysInMonth(31);
+      }
+      else {
+        setDaysInMonth(30);
+      }
     }
-  }
+  }, [month]);
 
   const days = [];
+
   const start = new Date(year, month);
   const end = new Date(year,
     month + 1, 0);
@@ -79,21 +81,27 @@ const DatePicker = ({
     );
     days.push(Date.parse(weekDay));
   }
-
-  const dayList = (day) => (
-    <div
-      key={day}
-      type="button"
-      onClick={() => setChosenDay(day)}
-      className={
-              new Date(day).getMonth() === month
-                ? 'datepicker-content-item'
-                : 'datepicker-content-item out'
-          }
-    >
-      {new Date(day).toLocaleDateString('fr-FR', { day: 'numeric' })}
-    </div>
-  );
+  const dayList = (day) => {
+    console.log(new Date(chosenDay).getMonth(), new Date(chosenDay).getDate());
+    console.log(new Date(day).getMonth(), new Date(day).getDate());
+    return (
+      <div
+        key={day}
+        type="button"
+        id={day}
+        onClick={() => setChosenDay(new Date(day))}
+        className={`datepicker-content-item 
+          ${new Date(day).getMonth() !== month ? 'out' : ''}
+          ${new Date(day).getMonth() === month
+            && new Date(day).getDate() === new Date(chosenDay).getDate()
+          ? 'today'
+          : ''
+          }`}
+      >
+        {new Date(day).toLocaleDateString('fr-FR', { day: 'numeric' })}
+      </div>
+    );
+  };
 
   return (
     <div className="datepicker">

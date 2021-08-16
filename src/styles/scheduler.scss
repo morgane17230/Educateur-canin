@@ -77,8 +77,9 @@
                 height: 9.5rem;
                 border-bottom: 1px solid black;
                 border-right: 1px solid black;
+                padding: .5rem;
                 &:hover {
-                    background-color: rgb(146, 135, 105);
+                    background-color: rgba(160, 160, 160, 0.76);
                 }
                 &.out {
                     color: rgba(0, 0, 0, 0.226);
@@ -91,7 +92,7 @@
             height: fit-content;
             width: calc(100% / 7);
             &:nth-child(n + 2):hover {
-                background-color: rgb(199, 190, 170);
+                background-color: rgba(160, 160, 160, 0.589);
             }
         }
         &-item {
@@ -100,7 +101,7 @@
             border-bottom: 1px solid rgb(160, 160, 160);
             border-left: 1px solid rgb(160, 160, 160);
             &:hover {
-                background-color: rgb(146, 135, 105);
+                background-color: rgba(160, 160, 160, 0.76);
             }
         }
         &-weekdays {
@@ -111,3 +112,7 @@
         }
     }
 }
+
+.today {
+                background-color: rgba(160, 160, 160, 0.589);
+            }

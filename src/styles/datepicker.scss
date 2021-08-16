@@ -47,13 +47,13 @@
             align-items: center;
             background-color: transparent;
             border: none;
-            &:hover {
-                    background-color: rgb(146, 135, 105);
-                }
             &.out {
                 color: rgba(0, 0, 0, 0.315);
             }
-
+            &.today {
+                background-color: rgba(160, 160, 160, 0.589);
+                border-radius: 50%;
+            }
         }
        
     }

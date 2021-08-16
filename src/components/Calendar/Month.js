@@ -12,6 +12,7 @@ const Scheduler = ({
   month,
   setChosenDay,
   daysInMonth,
+  chosenDay,
 }) => {
   // month display
 
@@ -39,13 +40,14 @@ const Scheduler = ({
       type="button"
       onClick={() => {
         setChosenDay(new Date(day));
-        console.log(new Date(day));
       }}
-      className={
-              new Date(day).getMonth() === month
-                ? 'scheduler-content-month-item'
-                : 'scheduler-content-month-item out'
-          }
+      className={`scheduler-content-month-item 
+          ${new Date(day).getMonth() !== month ? 'out' : ''}
+          ${new Date(day).getMonth() === month
+            && new Date(day).getDate() === new Date(chosenDay).getDate()
+        ? ' today'
+        : ''
+          }`}
     >
       {new Date(day).toLocaleDateString('fr-FR', {
         weekday: 'short',
@@ -65,6 +67,7 @@ const Scheduler = ({
 Scheduler.propTypes = {
   year: PropTypes.number.isRequired,
   month: PropTypes.number.isRequired,
+  chosenDay: PropTypes.instanceOf(Date).isRequired,
   daysInMonth: PropTypes.number.isRequired,
   setChosenDay: PropTypes.func.isRequired,
 };

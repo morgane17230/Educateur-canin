@@ -7,7 +7,12 @@ import PropTypes from 'prop-types';
 
 import 'src/styles/scheduler.scss';
 
-const Scheduler = ({ year, chosenDay, month }) => {
+const Scheduler = ({
+  year,
+  chosenDay,
+  month,
+  setChosenDay,
+}) => {
   // week display
 
   const dayHours = [[], [], [], [], [], [], []];
@@ -47,9 +52,25 @@ const Scheduler = ({ year, chosenDay, month }) => {
   );
 
   const weekDaysList = (dayHour, index) => (
-    <div key={`hours-${index}`} className="scheduler-content-hours">
-      <div key={index} className="scheduler-content-weekdays">
-        {new Date(dayHour[0]).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric' })}
+    <div
+      key={`hours-${index}`}
+      className="scheduler-content-hours"
+      onClick={() => setChosenDay(new Date(dayHour[0]))}
+    >
+      <div
+        key={index}
+        className={`scheduler-content-weekdays
+          ${
+              new Date(dayHour[0]).getMonth() === month
+              && new Date(dayHour[0]).getDate() === new Date(chosenDay).getDate()
+                ? 'today'
+                : ''
+          }`}
+      >
+        {new Date(dayHour[0]).toLocaleDateString('fr-FR', {
+          weekday: 'long',
+          day: 'numeric',
+        })}
       </div>
       {dayHour.map(weekHourList)}
     </div>
@@ -85,6 +106,7 @@ Scheduler.propTypes = {
   year: PropTypes.number.isRequired,
   month: PropTypes.number.isRequired,
   chosenDay: PropTypes.instanceOf(Date).isRequired,
+  setChosenDay: PropTypes.func.isRequired,
 };
 
 export default Scheduler;
