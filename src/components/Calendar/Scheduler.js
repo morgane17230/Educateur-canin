@@ -158,7 +158,8 @@ const Scheduler = ({
                                       / 86400000
                                       + new Date(weekStart).getDay()
                                       - 1)
-                                      / 7 + 1,
+                                      / 7
+                                      + 1,
               )}
             </div>
           </>
@@ -205,6 +206,13 @@ const Scheduler = ({
             onClick={onDisplayMonth}
           >
             Mois
+          </div>
+          <div
+            aria-label="month"
+            type="button"
+            onClick={() => setChosenDay(new Date())}
+          >
+            Aujourd'hui
           </div>
         </div>
       </div>

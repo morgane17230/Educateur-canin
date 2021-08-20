@@ -81,27 +81,23 @@ const DatePicker = ({
     );
     days.push(Date.parse(weekDay));
   }
-  const dayList = (day) => {
-    console.log(new Date(chosenDay).getMonth(), new Date(chosenDay).getDate());
-    console.log(new Date(day).getMonth(), new Date(day).getDate());
-    return (
-      <div
-        key={day}
-        type="button"
-        id={day}
-        onClick={() => setChosenDay(new Date(day))}
-        className={`datepicker-content-item 
+  const dayList = (day) => (
+    <div
+      key={day}
+      type="button"
+      id={day}
+      onClick={() => setChosenDay(new Date(day))}
+      className={`datepicker-content-item 
           ${new Date(day).getMonth() !== month ? 'out' : ''}
           ${new Date(day).getMonth() === month
             && new Date(day).getDate() === new Date(chosenDay).getDate()
-          ? 'today'
-          : ''
+        ? 'today'
+        : ''
           }`}
-      >
-        {new Date(day).toLocaleDateString('fr-FR', { day: 'numeric' })}
-      </div>
-    );
-  };
+    >
+      {new Date(day).toLocaleDateString('fr-FR', { day: 'numeric' })}
+    </div>
+  );
 
   return (
     <div className="datepicker">
