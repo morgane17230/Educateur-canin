@@ -1,0 +1,17 @@
+.event-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 55vh;
+    padding: 1rem;
+    &-header {
+        text-align: center;
+    }
+    &-content {
+        padding: 0 .5rem;
+    }
+    &-buttons {
+        display: flex;
+        justify-content: space-evenly;
+    }
+}

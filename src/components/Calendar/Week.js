@@ -12,6 +12,7 @@ const Scheduler = ({
   chosenDay,
   month,
   setChosenDay,
+  setOpenCreateModal,
 }) => {
   // week display
 
@@ -24,11 +25,7 @@ const Scheduler = ({
     for (let h = 8; h <= 18; h++) {
       for (let m = 0; m < 4; m++) {
         const weekDay = new Date(
-          new Date(
-            year,
-            month,
-            currentDate.getDate() + i,
-          ).setDate(
+          new Date(year, month, currentDate.getDate() + i).setDate(
             new Date(
               year,
               currentDate.getMonth(),
@@ -47,7 +44,10 @@ const Scheduler = ({
     <div
       key={`hour-${index}`}
       className="scheduler-content-item"
-      onClick={() => console.log(new Date(hour))}
+      onClick={() => {
+        setChosenDay(new Date(hour));
+        setOpenCreateModal(true);
+      }}
     />
   );
 
@@ -55,7 +55,6 @@ const Scheduler = ({
     <div
       key={`hours-${index}`}
       className="scheduler-content-hours"
-      onClick={() => setChosenDay(new Date(dayHour[0]))}
     >
       <div
         key={index}
@@ -107,6 +106,7 @@ Scheduler.propTypes = {
   month: PropTypes.number.isRequired,
   chosenDay: PropTypes.instanceOf(Date).isRequired,
   setChosenDay: PropTypes.func.isRequired,
+  setOpenCreateModal: PropTypes.func.isRequired,
 };
 
 export default Scheduler;

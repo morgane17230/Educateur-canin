@@ -1,9 +1,11 @@
 /* eslint-disable no-mixed-operators */
 import React, { useState } from 'react';
+import CreateEvent from 'src/containers/Calendar/CreateEvent';
 import DatePicker from './DatePicker';
 import Scheduler from './Scheduler';
+import EventDetails from './EventDetails';
 
-import '../../styles/index.scss';
+import 'src/styles/calendar.scss';
 
 // == Composant
 const Calendar = () => {
@@ -12,17 +14,12 @@ const Calendar = () => {
   const month = new Date(chosenDay).getMonth();
   const [daysInMonth, setDaysInMonth] = useState(0);
   const [date, setDate] = useState(new Date().getDate());
+  const [openCreateModal, setOpenCreateModal] = useState(false);
 
   // Display previous month
 
   const getPrevMonth = () => {
-    setChosenDay(
-      new Date(
-        year,
-        month - 1,
-        1,
-      ),
-    );
+    setChosenDay(new Date(year, month - 1, 1));
   };
 
   // Display next month
@@ -32,19 +29,32 @@ const Calendar = () => {
   };
 
   return (
-    <div className="app">
-      <DatePicker
-        getPrevMonth={getPrevMonth}
-        getNextMonth={getNextMonth}
-        daysInMonth={daysInMonth}
-        setDaysInMonth={setDaysInMonth}
-        date={date}
-        setDate={setDate}
-        year={year}
-        month={month}
-        chosenDay={chosenDay}
-        setChosenDay={setChosenDay}
-      />
+    <div className="calendar">
+      <div className="calendar-left">
+        <DatePicker
+          getPrevMonth={getPrevMonth}
+          getNextMonth={getNextMonth}
+          daysInMonth={daysInMonth}
+          setDaysInMonth={setDaysInMonth}
+          date={date}
+          setDate={setDate}
+          year={year}
+          month={month}
+          chosenDay={chosenDay}
+          setChosenDay={setChosenDay}
+          setOpenCreateModal={setOpenCreateModal}
+        />
+        {openCreateModal ? (
+          <CreateEvent
+            setOpenCreateModal={setOpenCreateModal}
+            chosenDay={chosenDay}
+            setChosenDay={setChosenDay}
+          />
+        ) : (
+          <EventDetails />
+        )}
+      </div>
+
       <Scheduler
         daysInMonth={daysInMonth}
         setDaysInMonth={setDaysInMonth}
@@ -56,6 +66,7 @@ const Calendar = () => {
         month={month}
         chosenDay={chosenDay}
         setChosenDay={setChosenDay}
+        setOpenCreateModal={setOpenCreateModal}
       />
     </div>
   );

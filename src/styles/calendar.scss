@@ -2,4 +2,14 @@
 @use 'vars';
 @use 'index';
 
+.calendar {
+    display: flex;
+    height: 100vh;
+    &-left {
+        display: flex;
+        width: 20%;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
 
