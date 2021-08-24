@@ -1,6 +1,7 @@
 @use 'reset';
-@use 'vars';
+@use 'vars' as v;
 @use 'index';
+
 
 .scheduler {
     display: flex;
@@ -62,7 +63,7 @@
                 border-bottom: 1px solid black;
                 font-size: small;
                 &:hover {
-                    background-color: rgb(146, 135, 105);
+                    background-color: v.$beige;
                 }
             }
         }
@@ -89,7 +90,7 @@
             height: fit-content;
             width: calc(100% / 7);
             &:nth-child(n + 2):hover {
-                background-color: rgba(160, 160, 160, 0.589);
+                background-color: v.$beige;
             }
         }
         &-item {
@@ -98,8 +99,19 @@
             border-bottom: 1px solid rgb(160, 160, 160);
             border-left: 1px solid rgb(160, 160, 160);
             &:hover {
-                background-color: rgba(160, 160, 160, 0.76);
+                background-color: lighten(v.$beige, 10%);
             }
+            span {
+                display: none;
+            }
+            &.event {
+                font-size: .5rem;
+                background-color: rgb(143, 186, 211);
+                span {
+                    display: none;
+                }
+            }
+            
         }
         &-weekdays {
             text-align: center;
@@ -111,5 +123,5 @@
 }
 
 .today {
-                background-color: rgba(160, 160, 160, 0.589);
+                background-color: v.$beige;
             }

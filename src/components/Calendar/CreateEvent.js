@@ -29,7 +29,6 @@ const CreateEvent = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     onCreateEvent(chosenDay);
-    console.log(e.target.value);
   };
 
   const handleOnSearch = (evt) => {
@@ -181,7 +180,7 @@ CreateEvent.defaultProps = {
   street: '',
   postalCode: '',
   city: '',
-  startTime: '08:00',
+  startTime: '',
   endTime: '',
   prestation: '',
 };

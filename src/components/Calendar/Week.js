@@ -7,12 +7,14 @@ import PropTypes from 'prop-types';
 
 import 'src/styles/scheduler.scss';
 
-const Scheduler = ({
+const Week = ({
   year,
   chosenDay,
   month,
   setChosenDay,
   setOpenCreateModal,
+  startTime,
+  endTime,
 }) => {
   // week display
 
@@ -43,19 +45,38 @@ const Scheduler = ({
   const weekHourList = (hour, index) => (
     <div
       key={`hour-${index}`}
-      className="scheduler-content-item"
+      className={`scheduler-content-item
+              ${hour
+              >= Date.parse(
+                `${chosenDay.getFullYear()} ${
+                  chosenDay.getMonth() + 1
+                } ${chosenDay.getDate()} ${startTime}`,
+              )
+              && hour
+                  <= Date.parse(
+                    `${chosenDay.getFullYear()} ${
+                      chosenDay.getMonth() + 1
+                    } ${chosenDay.getDate()} ${endTime}`,
+                  ) ? 'event' : ''}`}
+      value={hour}
       onClick={() => {
         setChosenDay(new Date(hour));
         setOpenCreateModal(true);
       }}
-    />
+    >
+      <span>
+        {`${chosenDay.getFullYear()} ${
+          chosenDay.getMonth() + 1
+        } ${chosenDay.getDate()} ${startTime}`}
+        {`${chosenDay.getFullYear()} ${
+          chosenDay.getMonth() + 1
+        } ${chosenDay.getDate()} ${endTime}`}
+      </span>
+    </div>
   );
 
   const weekDaysList = (dayHour, index) => (
-    <div
-      key={`hours-${index}`}
-      className="scheduler-content-hours"
-    >
+    <div key={`hours-${index}`} className="scheduler-content-hours">
       <div
         key={index}
         className={`scheduler-content-weekdays
@@ -101,12 +122,19 @@ const Scheduler = ({
   );
 };
 
-Scheduler.propTypes = {
+Week.propTypes = {
   year: PropTypes.number.isRequired,
   month: PropTypes.number.isRequired,
   chosenDay: PropTypes.instanceOf(Date).isRequired,
+  startTime: PropTypes.string,
+  endTime: PropTypes.string,
   setChosenDay: PropTypes.func.isRequired,
   setOpenCreateModal: PropTypes.func.isRequired,
 };
 
-export default Scheduler;
+Week.defaultProps = {
+  startTime: '',
+  endTime: '',
+};
+
+export default Week;

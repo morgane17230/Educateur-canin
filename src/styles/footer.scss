@@ -1,0 +1,15 @@
+@use 'reset';
+@use 'vars' as v;
+@use 'index';
+
+
+.footer {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    background-color: v.$beige;
+    padding: .5rem 0;
+    &-item {
+        font-size: small;
+    }
+}

@@ -1,0 +1,42 @@
+@use 'reset';
+@use 'vars' as v;
+@use 'index';
+
+.header {
+    display: flex;
+    flex-direction: column;
+    &-banner {
+        display: flex;
+        background-color: v.$green;
+        span {
+            align-self: center;
+            font-weight: bold;
+            font-size: 2rem;
+            padding-left: 1rem;
+            color: lighten(v.$green, 30%);
+        }
+        &-logo {
+            display: flex;
+            width: 5rem;
+        }
+    }
+    &-menu {
+        display: flex;
+        width: 100%;
+        &-item {
+            display: flex;
+            width: calc(100% / 6);
+            padding: 2rem 0 .5rem 0;
+            justify-content: center;
+            background-color: v.$beige;
+            color: white;
+            font-weight: bold;
+            transition: 1500ms;
+            &:hover {
+                transition: 200ms;
+                background-color: lighten(v.$beige, 10%);
+                color: darken(v.$beige, 10%);
+            }
+        }
+    }
+}
