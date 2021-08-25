@@ -1,3 +1,227 @@
 @use 'reset';
 @use 'vars' as v;
 @use 'index';
+
+.error {
+    display: flex;
+    width: 100%;
+    min-height: 85vh;
+    justify-content: center;
+   &-content {
+       display: flex;
+       flex-direction: column;
+       text-align: center;
+       font-size: 10rem;
+       color: v.$green;
+       padding-top: 5rem;
+       div {
+           font-size: 2rem;
+       }
+   }
+}
+.pad {
+    width: 25px;
+    height: 27px;
+    background-color: v.$beige;
+    -webkit-border-radius: 63px 63px 63px 63px / 108px 108px 72px 72px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    display: block;
+}
+.large {
+    width: 70px;
+    height: 80px;
+    transform: rotate(80deg);
+    left: 100px;
+    top: 50px;
+}
+.small {
+    &-1 {
+        transform: rotate(50deg);
+        left: 145px;
+        top: 28px;
+    }
+    &-2 {
+        transform: rotate(65deg);
+        left: 174px;
+        top: 50px;
+    }
+    &-3 {
+        transform: rotate(98deg);
+        left: 178px;
+        top: 87px;
+    }
+    &-4 {
+        transform: rotate(140deg);
+        left: 158px;
+        top: 117px;
+    }
+}
+
+.paw-print {
+    &-1 {
+        opacity: 0;
+        position: absolute;
+        left: 1%;
+        top: 70vh;
+        transform: rotate(-40deg);
+        -webkit-animation: walk 3s linear infinite;
+        animation: /*keyframe*/ walk /*duration*/ 3s /*transition*/ linear
+            /*repeat*/ infinite;
+    }
+    &-2 {
+        opacity: 0;
+        position: absolute;
+        left: .5%;
+        top: 80vh;
+        transform: rotate(-5deg);
+        -webkit-animation: walk 3s linear infinite 0.25s;
+        animation: walk 3s linear infinite /*delay*/ 0.25s;
+    }
+    &-3 {
+        opacity: 0;
+        position: absolute;
+        left: 12%;
+        top: 60vh;
+        transform: rotate(-30deg);
+        -webkit-animation: walk 3s linear infinite 0.5s;
+        animation: walk 3s linear infinite 0.5s;
+    }
+    &-4 {
+        opacity: 0;
+        position: absolute;
+        left: 10%;
+        top: 75vh;
+        transform: rotate(-20deg);
+        -webkit-animation: walk 3s linear infinite 0.75s;
+        animation: walk 3s linear infinite 0.75s;
+    }
+    &-5 {
+        opacity: 0;
+        position: absolute;
+        left: 28%;
+        top: 47vh;
+        transform: rotate(-10deg);
+        -webkit-animation: walk 3s linear infinite 1s;
+        animation: walk 3s linear infinite 1s;
+    }
+    &-6 {
+        opacity: 0;
+        position: absolute;
+        z-index: 0;
+        left: 25%;
+        top: 60vh;
+        transform: rotate(10deg);
+        -webkit-animation: walk 3s linear infinite 1.25s;
+        animation: walk 3s linear infinite 1.25s;
+    }
+    &-7 {
+        opacity: 0;
+        position: absolute;
+        left: 45%;
+        top: 40vh;
+        transform: rotate(20deg);
+        -webkit-animation: walk 3s linear infinite 1.5s;
+        animation: walk 3s linear infinite 1.5s;
+    }
+    &-8 {
+        opacity: 0;
+        position: absolute;
+        left: 38%;
+        top: 60vh;
+        transform: rotate(10deg);
+        -webkit-animation: walk 3s linear infinite 1.75s;
+        animation: walk 3s linear infinite 1.75s;
+    }
+    &-9 {
+        opacity: 0;
+        position: absolute;
+        left: 52%;
+        top: 60vh;
+        transform: rotate(10deg);
+        -webkit-animation: walk 3s linear infinite 2s;
+        animation: walk 3s linear infinite 2s;
+    }
+    &-10 {
+        opacity: 0;
+        position: absolute;
+        left: 56%;
+        top: 42vh;
+        transform: rotate(10deg);
+        -webkit-animation: walk 3s linear infinite 2.25s;
+        animation: walk 3s linear infinite 2.25s;
+    }
+    &-11 {
+        opacity: 0;
+        position: absolute;
+        left: 65%;
+        top: 45vh;
+        transform: rotate(-30deg);
+        -webkit-animation: walk 3s linear infinite 2.5s;
+        animation: walk 3s linear infinite 2.5s;
+    }
+    &-12 {
+        opacity: 0;
+        position: absolute;
+        left: 70%;
+        top: 50vh;
+        transform: rotate(20deg);
+        -webkit-animation: walk 3s linear infinite 2.75s;
+        animation: walk 3s linear infinite 2.75s;
+    }
+    &-13 {
+        opacity: 0;
+        position: absolute;
+        left: 75%;
+        top: 40vh;
+        transform: rotate(-50deg);
+        -webkit-animation: walk 3s linear infinite 3s;
+        animation: walk 3s linear infinite 3s;
+    }
+    &-14 {
+        opacity: 0;
+        position: absolute;
+        left: 79%;
+        top: 40vh;
+        transform: rotate(10deg);
+        -webkit-animation: walk 3s linear infinite 3.25s;
+        animation: walk 3s linear infinite 3.25s;
+    }
+    &-15 {
+        opacity: 0;
+        position: absolute;
+        left: 80%;
+        top: 20vh;
+        transform: rotate(-50deg);
+        -webkit-animation: walk 3s linear infinite 3.5s;
+        animation: walk 3s linear infinite 3.5s;
+    }
+    &-16 {
+        opacity: 0;
+        position: absolute;
+        left: 85%;
+        top: 25vh;
+        transform: rotate(-10deg);
+        -webkit-animation: walk 3s linear infinite 3.75s;
+        animation: walk 3s linear infinite 3.75s;
+    }
+}
+
+@-webkit-keyframes walk {
+    25% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes walk {
+    /* appear */
+    25% {
+        opacity: 1;
+    }
+    /* disappear */
+    100% {
+        opacity: 0;
+    }
+}

@@ -17,6 +17,7 @@ const initialState = {
   endTime: '',
   prestation: '',
   error: 0,
+  loading: true,
 };
 
 const reducer = (state = initialState, action = {}) => {

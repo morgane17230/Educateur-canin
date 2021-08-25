@@ -23,6 +23,7 @@ import ChatAdmin from '../BackOffice/ChatAdmin';
 import Contact from '../Contact';
 import CGU from '../CGU';
 import Error from '../Error';
+import Loader from '../Loader';
 
 import 'src/styles/index.scss';
 
@@ -71,6 +72,7 @@ const App = () => (
         component={Statistic}
       />
       <Route exact path="/backoffice/messagerie" component={ChatAdmin} />
+      <Route exact path="/loader" component={Loader} />
       <Route path="/page-non-trouvee" component={Error} />
       <Redirect to="/page-non-trouvee" />
     </Switch>

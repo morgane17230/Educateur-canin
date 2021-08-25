@@ -7,9 +7,13 @@
     display: flex;
     width: 100%;
     justify-content: space-evenly;
-    background-color: v.$beige;
+    background-color: v.$green;
     padding: .5rem 0;
+    position: fixed;
+    bottom: 0;
     &-item {
         font-size: small;
+        color: white;
+        font-weight: bold;
     }
 }
