@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header-banner">
-        <img className="header-banner-logo" src={logo} alt="logo" />
+        <Link to="/"><img className="header-banner-logo" src={logo} alt="logo" /></Link>
         <span>Educateur Canin</span>
       </div>
       <div className="header-menu">
@@ -20,7 +20,7 @@ const Header = () => {
           Conseils
         </Link>
 
-        <Link className="header-menu-item" to="/rendez-vous">
+        <Link className="header-menu-item" to="/prendre-rendez-vous">
           Rendez-vous
         </Link>
 

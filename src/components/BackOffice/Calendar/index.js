@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-operators */
 import React, { useState } from 'react';
-import CreateEvent from 'src/containers/Calendar/CreateEvent';
+import CreateEvent from "src/containers/BackOffice/Calendar/CreateEvent";
 import DatePicker from './DatePicker';
 import Scheduler from './Scheduler';
 import EventDetails from './EventDetails';

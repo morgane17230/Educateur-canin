@@ -15,7 +15,7 @@ const Header = () => {
         © - 2021Marque entreprise
       </span>
 
-      <Link className="footer-item" to="/rconditions-generales-d-utilisation">
+      <Link className="footer-item" to="/conditions-generales-d-utilisation">
         CGU
       </Link>
     </div>
