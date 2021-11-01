@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-operators */
 import React, { useState } from 'react';
-import CreateEvent from "src/containers/BackOffice/Calendar/CreateEvent";
+import CreateEvent from 'src/containers/BackOffice/Calendar/CreateEvent';
 import DatePicker from './DatePicker';
 import Scheduler from './Scheduler';
 import EventDetails from './EventDetails';
@@ -30,7 +30,20 @@ const Calendar = () => {
 
   return (
     <div className="calendar">
-      <div className="calendar-left">
+      <Scheduler
+        daysInMonth={daysInMonth}
+        setDaysInMonth={setDaysInMonth}
+        getPrevMonth={getPrevMonth}
+        getNextMonth={getNextMonth}
+        date={date}
+        setDate={setDate}
+        year={year}
+        month={month}
+        chosenDay={chosenDay}
+        setChosenDay={setChosenDay}
+        setOpenCreateModal={setOpenCreateModal}
+      />
+      <div className="calendar-right">
         <DatePicker
           getPrevMonth={getPrevMonth}
           getNextMonth={getNextMonth}
@@ -54,20 +67,6 @@ const Calendar = () => {
           <EventDetails />
         )}
       </div>
-
-      <Scheduler
-        daysInMonth={daysInMonth}
-        setDaysInMonth={setDaysInMonth}
-        getPrevMonth={getPrevMonth}
-        getNextMonth={getNextMonth}
-        date={date}
-        setDate={setDate}
-        year={year}
-        month={month}
-        chosenDay={chosenDay}
-        setChosenDay={setChosenDay}
-        setOpenCreateModal={setOpenCreateModal}
-      />
     </div>
   );
 };

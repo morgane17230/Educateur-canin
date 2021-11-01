@@ -2,6 +2,7 @@
 /* eslint-disable no-plusplus */
 import React from 'react';
 import PropTypes from 'prop-types';
+import events from '../../../data/events.json';
 
 // StyleSheet
 
@@ -43,16 +44,35 @@ const Scheduler = ({
       }}
       className={`scheduler-content-month-item 
           ${new Date(day).getMonth() !== month ? 'out' : ''}
-          ${new Date(day).getMonth() === month
-            && new Date(day).getDate() === new Date(chosenDay).getDate()
-        ? ' today'
-        : ''
+          ${
+              new Date(day).getMonth() === month
+              && new Date(day).getDate() === new Date(chosenDay).getDate()
+                ? ' today'
+                : ''
           }`}
     >
       {new Date(day).toLocaleDateString('fr-FR', {
         weekday: 'short',
         day: 'numeric',
       })}
+      <div>
+        {events.map(
+          (event) => Date.parse(
+            new Date(
+              new Date(
+                new Date(event.start_time).setHours(0),
+              ).setMinutes(0),
+            ),
+          ) === day && (
+          <div
+            value={event.start_time}
+            key={`${event.start_time}`}
+            style={{ backgroundColor: `${event.color}` }}
+            className="event"
+          />
+          ),
+        )}
+      </div>
     </div>
   );
 

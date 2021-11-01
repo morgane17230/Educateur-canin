@@ -1,19 +1,16 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-
-// StyleSheet
-
+import events from '../../../data/events.json';
 import 'src/styles/event.scss';
 
 const Event = () => {
   console.log('event');
   return (
-    <div className="event">
-      Event
-    </div>
+    <>
+      {events.map((event) => (
+        <span>{event.start_time}</span>
+      ))}
+    </>
   );
 };
-
-Event.propTypes = {};
 
 export default Event;

@@ -3,6 +3,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import events from '../../../data/events.json';
+
 // StyleSheet
 
 import 'src/styles/scheduler.scss';
@@ -13,8 +15,6 @@ const Week = ({
   month,
   setChosenDay,
   setOpenCreateModal,
-  startTime,
-  endTime,
 }) => {
   // week display
 
@@ -37,6 +37,7 @@ const Week = ({
         );
         weekDay.setHours(h);
         weekDay.setMinutes(15 * m);
+        weekDay.setUTCSeconds(0);
         dayHours[i].push(Date.parse(weekDay));
       }
     }
@@ -45,33 +46,25 @@ const Week = ({
   const weekHourList = (hour, index) => (
     <div
       key={`hour-${index}`}
-      className={`scheduler-content-item
-              ${hour
-              >= Date.parse(
-                `${chosenDay.getFullYear()} ${
-                  chosenDay.getMonth() + 1
-                } ${chosenDay.getDate()} ${startTime}`,
-              )
-              && hour
-                  <= Date.parse(
-                    `${chosenDay.getFullYear()} ${
-                      chosenDay.getMonth() + 1
-                    } ${chosenDay.getDate()} ${endTime}`,
-                  ) ? 'event' : ''}`}
+      className="scheduler-content-item"
       value={hour}
       onClick={() => {
         setChosenDay(new Date(hour));
         setOpenCreateModal(true);
+        console.log(new Date(hour));
       }}
     >
-      <span>
-        {`${chosenDay.getFullYear()} ${
-          chosenDay.getMonth() + 1
-        } ${chosenDay.getDate()} ${startTime}`}
-        {`${chosenDay.getFullYear()} ${
-          chosenDay.getMonth() + 1
-        } ${chosenDay.getDate()} ${endTime}`}
-      </span>
+      {events.map(
+        (event) => event.start_time <= hour
+                  && event.end_time > hour && (
+                  <div
+                    key={`${event.start_time}`}
+                    className="event"
+                    style={{ backgroundColor: `${event.color}` }}
+                    value={event.start_time}
+                  />
+        ),
+      )}
     </div>
   );
 
@@ -88,7 +81,7 @@ const Week = ({
           }`}
       >
         {new Date(dayHour[0]).toLocaleDateString('fr-FR', {
-          weekday: 'long',
+          weekday: 'short',
           day: 'numeric',
         })}
       </div>
@@ -103,22 +96,21 @@ const Week = ({
   }
 
   return (
-    <>
-      <div className="scheduler-content">
-        <div className="scheduler-content-hours">
-          <div className="scheduler-content-header-item">Heures</div>{' '}
-          {dayHoursHeader.map((item) => (
-            <div
-              key={`header-${item}`}
-              className="scheduler-content-header-item"
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-        {dayHours.map(weekDaysList)}
+
+    <div className="scheduler-content">
+      <div className="scheduler-content-hours">
+        <div className="scheduler-content-header-item">Heures</div>
+        {dayHoursHeader.map((item) => (
+          <div
+            key={`header-${item}`}
+            className="scheduler-content-header-item"
+          >
+            {item}
+          </div>
+        ))}
       </div>
-    </>
+      {dayHours.map(weekDaysList)}
+    </div>
   );
 };
 
@@ -126,15 +118,10 @@ Week.propTypes = {
   year: PropTypes.number.isRequired,
   month: PropTypes.number.isRequired,
   chosenDay: PropTypes.instanceOf(Date).isRequired,
-  startTime: PropTypes.string,
-  endTime: PropTypes.string,
   setChosenDay: PropTypes.func.isRequired,
   setOpenCreateModal: PropTypes.func.isRequired,
 };
 
-Week.defaultProps = {
-  startTime: '',
-  endTime: '',
-};
+Week.defaultProps = {};
 
 export default Week;

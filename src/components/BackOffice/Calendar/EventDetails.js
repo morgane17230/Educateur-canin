@@ -1,7 +1,5 @@
 import React from 'react';
 
-// StyleSheet
-
 import 'src/styles/eventdetails.scss';
 
 const EventDetails = () => {

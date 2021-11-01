@@ -1,21 +1,45 @@
-@use 'reset';
-@use 'vars' as v;
-@use 'index';
+@use "reset";
+@use "vars" as v;
+@use "index";
 
 .event-details {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 55vh;
-    padding: 1rem;
+    padding: 0 0 1.5rem 0;
+    @media (max-width: 640px) {
+        border-top: 2px solid v.$beige;
+        font-size: 0.8rem;
+        
+    }
     &-header {
         text-align: center;
-    }
-    &-content {
-        padding: 0 .5rem;
+        background-color: v.$beige;
+        padding: 1rem;
     }
     &-buttons {
         display: flex;
         justify-content: space-evenly;
+        button {
+            background-color: white;
+            margin: 0.5rem;
+            padding: .5rem;
+            width: 50%;
+            border: 2px solid v.$beige;
+            border-radius: 20px;
+            color: v.$beige;
+            text-align: center;
+            font-weight: bold;
+            &:hover {
+                padding: 0;
+                transition: 200ms;
+                background-color: lighten(v.$beige, 10%);
+                color: darken(v.$beige, 10%);
+            }
+            @media (max-width: 640px) {
+                padding: 0.5rem;
+            }
+        }
     }
 }

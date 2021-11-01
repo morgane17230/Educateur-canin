@@ -1,7 +1,6 @@
-@use 'reset';
-@use 'vars' as v;
-@use 'index';
-
+@use "reset";
+@use "vars" as v;
+@use "index";
 
 .footer {
     display: flex;
@@ -9,8 +8,11 @@
     justify-content: space-evenly;
     background-color: v.$green;
     padding: .5rem 0;
-    position: fixed;
     bottom: 0;
+    position: fixed;
+    z-index: 24;
+    -webkit-box-shadow: 5px -4px 15px -3px rgba(0, 0, 0, 0.64);
+    box-shadow: 5px -4px 15px -3px rgba(0, 0, 0, 0.64);
     &-item {
         font-size: small;
         color: white;

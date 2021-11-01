@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import 'src/styles/footer.scss';
 
-const Header = () => {
+const Footer = () => {
   console.log('footer');
   return (
     <div className="footer">
@@ -22,4 +22,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Footer;

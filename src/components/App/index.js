@@ -1,5 +1,7 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import {
+  Switch, Route, Redirect,
+} from 'react-router-dom';
 import Header from '../Layer/Header';
 import Footer from '../Layer/Footer';
 import Home from '../Home';
@@ -48,7 +50,11 @@ const App = () => (
       <Route exact path="/profil" component={ProfilClient} />
       <Route exact path="/rendez-vous" component={RDVClient} />
       <Route exact path="/messagerie" component={ChatClient} />
-      <Route exact path="/backoffice/profil" component={ProfilAdmin} />
+      <Route
+        exact
+        path="/backoffice/profil"
+        component={ProfilAdmin}
+      />
       <Route
         exact
         path="/backoffice/liste-clients"
@@ -71,7 +77,11 @@ const App = () => (
         path="/backoffice/statistiques"
         component={Statistic}
       />
-      <Route exact path="/backoffice/messagerie" component={ChatAdmin} />
+      <Route
+        exact
+        path="/backoffice/messagerie"
+        component={ChatAdmin}
+      />
       <Route exact path="/loader" component={Loader} />
       <Route path="/page-non-trouvee" component={Error} />
       <Redirect to="/page-non-trouvee" />
