@@ -1,9 +1,21 @@
 import {
   CHANGE_FIELD,
+  GET_ERROR,
+} from 'src/store/actions/global';
+
+import {
   SEARCH_USER,
+} from 'src/store/actions/user';
+
+import {
   SELECT_PRESTATION,
+
+} from 'src/store/actions/presta';
+
+import {
   ON_CREATE_EVENT,
-} from 'src/actions/';
+  SET_EVENTS,
+} from 'src/store/actions/event';
 
 const initialState = {
   lastName: '',
@@ -16,8 +28,9 @@ const initialState = {
   startTime: '',
   endTime: '',
   prestation: '',
-  error: 0,
+  error: {},
   loading: true,
+  events: [],
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -26,6 +39,18 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.key]: action.value,
+      };
+    case GET_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case SET_EVENTS:
+      return {
+        ...state,
+        ...action.payload,
+        events: action.payload,
+        error: {},
       };
     case SEARCH_USER:
       return {

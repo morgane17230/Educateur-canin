@@ -2,18 +2,20 @@
 /* eslint-disable no-plusplus */
 import React from 'react';
 import PropTypes from 'prop-types';
-import events from 'src/data/events.json';
 
 // StyleSheet
 
 import 'src/styles/scheduler.scss';
 
-const Scheduler = ({
+const Month = ({
+  events,
   year,
   month,
   setChosenDay,
   daysInMonth,
   chosenDay,
+  setEventValue,
+  setCreateEventModale,
 }) => {
   // month display
 
@@ -42,6 +44,7 @@ const Scheduler = ({
       onClick={() => {
         setChosenDay(new Date(day));
       }}
+      onDoubleClick={() => setCreateEventModale(true)}
       className={`scheduler-content-month-item 
           ${new Date(day).getMonth() !== month ? 'out' : ''}
           ${
@@ -60,15 +63,18 @@ const Scheduler = ({
           (event) => Date.parse(
             new Date(
               new Date(
-                new Date(event.start_time).setHours(0),
+                new Date(Number(event.start_time)).setHours(0),
               ).setMinutes(0),
             ),
           ) === day && (
           <div
-            value={event.start_time}
-            key={`${event.start_time}`}
-            style={{ backgroundColor: `${event.color}` }}
+            value={event.id}
+            key={`${event.id}`}
+            style={{
+              backgroundColor: `${event.presta.color}`,
+            }}
             className="event"
+            onClick={() => setEventValue(event.id)}
           />
           ),
         )}
@@ -78,18 +84,24 @@ const Scheduler = ({
 
   return (
     <>
-      <div className="scheduler-content-month">{ days.map(dayList) }</div>
+      <div className="scheduler-content-month">{days.map(dayList)}</div>
     </>
-
   );
 };
 
-Scheduler.propTypes = {
+Month.propTypes = {
+  events: PropTypes.array,
   year: PropTypes.number.isRequired,
   month: PropTypes.number.isRequired,
   chosenDay: PropTypes.instanceOf(Date).isRequired,
   daysInMonth: PropTypes.number.isRequired,
   setChosenDay: PropTypes.func.isRequired,
+  setEventValue: PropTypes.func.isRequired,
+  setCreateEventModale: PropTypes.func.isRequired,
 };
 
-export default Scheduler;
+Month.defaultProps = {
+  events: [],
+};
+
+export default Month;

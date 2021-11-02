@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Icon from '@mdi/react';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 import Week from 'src/containers/Calendar/Week';
+import CreateEvent from 'src/modals/CreateEvent';
 import Month from './Month';
 import Day from './Day';
 
@@ -13,6 +14,8 @@ import Day from './Day';
 import 'src/styles/scheduler.scss';
 
 const Scheduler = ({
+  setEventValue,
+  events,
   year,
   month,
   setDate,
@@ -22,11 +25,11 @@ const Scheduler = ({
   setChosenDay,
   getPrevMonth,
   getNextMonth,
-  setOpenCreateModal,
 }) => {
   const [displayMonth, setDisplayMonth] = useState(false);
   const [displayWeek, setDisplayWeek] = useState(true);
   const [displayDay, setDisplayDay] = useState(false);
+  const [createEventModale, setCreateEventModale] = useState(false);
 
   const lessDay = new Date(chosenDay).getDay() === 0
     ? 6
@@ -137,60 +140,53 @@ const Scheduler = ({
             type="button"
             onClick={getPrevDate}
           >
-            <Icon
-              path={mdiChevronLeft}
-              title="next date"
-              size={1}
-            />
+            <Icon path={mdiChevronLeft} title="next date" size={1} />
           </button>
 
           {displayWeek && (
-            <>
-              <div>
-                {new Date(weekStart).toLocaleDateString(
-                  'fr-FR',
-                  {
-                    month: 'long',
-                    year: 'numeric',
-                  },
-                )}{' '}
-                -{' '}
-                {new Date(weekEnd).toLocaleDateString('fr-FR', {
-                  month: 'long',
-                  year: 'numeric',
-                })}{' '}
-              </div>
-              <div>
-                Semaine{' '}
-                {Math.floor(
-                  ((Date.parse(weekStart)
-                                        - Date.parse(year, 0, 1))
-                                        / 86400000
-                                        + new Date(weekStart).getDay()
-                                        - 1)
-                                        / 7
-                                        + 1,
-                )}
-              </div>
-            </>
+          <>
+            <div>
+              {new Date(weekStart).toLocaleDateString('fr-FR', {
+                month: 'long',
+                year: 'numeric',
+              })}{' '}
+              -{' '}
+              {new Date(weekEnd).toLocaleDateString('fr-FR', {
+                month: 'long',
+                year: 'numeric',
+              })}{' '}
+            </div>
+            <div>
+              Semaine{' '}
+              {Math.floor(
+                ((Date.parse(weekStart)
+                                      - Date.parse(year, 0, 1))
+                                      / 86400000
+                                      + new Date(weekStart).getDay()
+                                      - 1)
+                                      / 7
+                                      + 1,
+              )}
+            </div>
+          </>
           )}
           {displayMonth && (
-            <div>
-              {new Date(chosenDay).toLocaleDateString('fr-FR', {
-                month: 'long',
-                year: 'numeric',
-              })}
-            </div>
+          <div>
+            {new Date(chosenDay).toLocaleDateString('fr-FR', {
+              month: 'long',
+              year: 'numeric',
+            })}
+          </div>
           )}
           {displayDay && (
-            <div>
-              {new Date(chosenDay).toLocaleDateString('fr-FR', {
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              })}
-            </div>
+          <div>
+            {new Date(chosenDay).toLocaleDateString('fr-FR', {
+              weekday: 'long',
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}
+          </div>
           )}
 
           <button
@@ -199,11 +195,7 @@ const Scheduler = ({
             type="button"
             onClick={getNextDate}
           >
-            <Icon
-              path={mdiChevronRight}
-              title="next date"
-              size={1}
-            />
+            <Icon path={mdiChevronRight} title="next date" size={1} />
           </button>
         </div>
 
@@ -211,11 +203,7 @@ const Scheduler = ({
           <div aria-label="day" type="button" onClick={onDisplayDay}>
             Jour
           </div>
-          <div
-            aria-label="week"
-            type="button"
-            onClick={onDisplayWeek}
-          >
+          <div aria-label="week" type="button" onClick={onDisplayWeek}>
             Semaine
           </div>
           <div
@@ -235,41 +223,54 @@ const Scheduler = ({
         </div>
       </div>
       {displayWeek && (
-        <Week
-          setDate={setDate}
-          daysInMonth={daysInMonth}
-          chosenDay={chosenDay}
-          year={year}
-          month={month}
-          setChosenDay={setChosenDay}
-          setOpenCreateModal={setOpenCreateModal}
-        />
+      <Week
+        setDate={setDate}
+        daysInMonth={daysInMonth}
+        chosenDay={chosenDay}
+        year={year}
+        month={month}
+        setChosenDay={setChosenDay}
+        events={events}
+        setEventValue={setEventValue}
+        setCreateEventModale={setCreateEventModale}
+      />
       )}
       {displayDay && (
-        <Day
-          setDate={setDate}
-          daysInMonth={daysInMonth}
-          chosenDay={chosenDay}
-          year={year}
-          month={month}
-          setOpenCreateModal={setOpenCreateModal}
-        />
+      <Day
+        setDate={setDate}
+        daysInMonth={daysInMonth}
+        chosenDay={chosenDay}
+        year={year}
+        month={month}
+        events={events}
+        setEventValue={setEventValue}
+        setCreateEventModale={setCreateEventModale}
+      />
       )}
       {displayMonth && (
-        <Month
-          daysInMonth={daysInMonth}
-          chosenDay={chosenDay}
-          year={year}
-          month={month}
-          setChosenDay={setChosenDay}
-          setOpenCreateModal={setOpenCreateModal}
-        />
+      <Month
+        daysInMonth={daysInMonth}
+        chosenDay={chosenDay}
+        year={year}
+        month={month}
+        setChosenDay={setChosenDay}
+        events={events}
+        setEventValue={setEventValue}
+        setCreateEventModale={setCreateEventModale}
+      />
+      )}
+      {createEventModale && (
+      <CreateEvent
+        setCreateEventModale={setCreateEventModale}
+        chosenDay={chosenDay}
+      />
       )}
     </div>
   );
 };
 
 Scheduler.propTypes = {
+  events: PropTypes.array,
   year: PropTypes.number.isRequired,
   month: PropTypes.number.isRequired,
   setDate: PropTypes.func.isRequired,
@@ -279,7 +280,11 @@ Scheduler.propTypes = {
   setChosenDay: PropTypes.func.isRequired,
   getPrevMonth: PropTypes.func.isRequired,
   getNextMonth: PropTypes.func.isRequired,
-  setOpenCreateModal: PropTypes.func.isRequired,
+  setEventValue: PropTypes.func.isRequired,
+};
+
+Scheduler.defaultProps = {
+  events: [],
 };
 
 export default Scheduler;

@@ -3,18 +3,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import events from 'src/data/events.json';
-
 // StyleSheet
 
 import 'src/styles/scheduler.scss';
 
 const Week = ({
+  setEventValue,
+  events,
   year,
   chosenDay,
   month,
   setChosenDay,
-  setOpenCreateModal,
+  setCreateEventModale,
 }) => {
   // week display
 
@@ -50,18 +50,18 @@ const Week = ({
       value={hour}
       onClick={() => {
         setChosenDay(new Date(hour));
-        setOpenCreateModal(true);
-        console.log(new Date(hour));
       }}
+      onDoubleClick={() => setCreateEventModale(true)}
     >
       {events.map(
         (event) => event.start_time <= hour
                   && event.end_time > hour && (
                   <div
-                    key={`${event.start_time}`}
+                    key={`${event.id}`}
+                    style={{ backgroundColor: `${event.presta.color}` }}
                     className="event"
-                    style={{ backgroundColor: `${event.color}` }}
-                    value={event.start_time}
+                    value={event.id}
+                    onClick={() => setEventValue(event.id)}
                   />
         ),
       )}
@@ -115,13 +115,17 @@ const Week = ({
 };
 
 Week.propTypes = {
+  events: PropTypes.array,
   year: PropTypes.number.isRequired,
   month: PropTypes.number.isRequired,
   chosenDay: PropTypes.instanceOf(Date).isRequired,
   setChosenDay: PropTypes.func.isRequired,
-  setOpenCreateModal: PropTypes.func.isRequired,
+  setEventValue: PropTypes.func.isRequired,
+  setCreateEventModale: PropTypes.func.isRequired,
 };
 
-Week.defaultProps = {};
+Week.defaultProps = {
+  events: [],
+};
 
 export default Week;

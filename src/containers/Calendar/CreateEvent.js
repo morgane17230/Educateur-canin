@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import CreateEvent from 'src/components/Calendar/CreateEvent';
+import CreateEvent from 'src/modals/CreateEvent';
 import {
   changeField,
   onCreateEvent,

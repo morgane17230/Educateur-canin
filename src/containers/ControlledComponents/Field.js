@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Field from 'src/components/ControlledComponents/Field';
-import { changeField } from 'src/actions';
+import { changeField } from 'src/store/actions/global';
 
 const mapStateToProps = (state, ownProps) => ({
   inputValue: state[ownProps.name],

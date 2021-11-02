@@ -1,5 +1,6 @@
 /* eslint-disable no-mixed-operators */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import DatePicker from 'src/components/Calendar/DatePicker';
 import Scheduler from 'src/components/Calendar/Scheduler';
 import EventDetails from 'src/components/Calendar/EventDetails';
@@ -7,12 +8,17 @@ import EventDetails from 'src/components/Calendar/EventDetails';
 import 'src/styles/adminplanning.scss';
 
 // == Composant
-const AdminPlanning = () => {
+const AdminPlanning = ({ onGetEvents, events }) => {
   const [chosenDay, setChosenDay] = useState(new Date());
   const year = new Date(chosenDay).getFullYear();
   const month = new Date(chosenDay).getMonth();
   const [daysInMonth, setDaysInMonth] = useState(0);
   const [date, setDate] = useState(new Date().getDate());
+  const [eventValue, setEventValue] = useState(0);
+
+  useEffect(() => {
+    onGetEvents();
+  }, []);
 
   // Display previous month
 
@@ -39,6 +45,8 @@ const AdminPlanning = () => {
         month={month}
         chosenDay={chosenDay}
         setChosenDay={setChosenDay}
+        events={events}
+        setEventValue={setEventValue}
       />
       <div className="calendar-right">
         <DatePicker
@@ -54,10 +62,19 @@ const AdminPlanning = () => {
           setChosenDay={setChosenDay}
         />
 
-        <EventDetails />
+        <EventDetails events={events} eventValue={eventValue} />
       </div>
     </div>
   );
+};
+
+AdminPlanning.propTypes = {
+  onGetEvents: PropTypes.func.isRequired,
+  events: PropTypes.array,
+};
+
+AdminPlanning.defaultProps = {
+  events: [],
 };
 
 export default AdminPlanning;

@@ -3,13 +3,17 @@
 /* eslint-disable no-plusplus */
 import React from 'react';
 import PropTypes from 'prop-types';
-import events from 'src/data/events.json';
 
 // StyleSheet
 
 import 'src/styles/scheduler.scss';
 
-const Day = ({ chosenDay }) => {
+const Day = ({
+  chosenDay,
+  events,
+  setEventValue,
+  setCreateEventModale,
+}) => {
   const dayHours = [];
   for (let h = 8; h <= 18; h++) {
     for (let m = 0; m < 4; m++) {
@@ -32,6 +36,7 @@ const Day = ({ chosenDay }) => {
             key={`day-${index}`}
             value={`${dayHour}`}
             onClick={() => console.log(new Date(dayHour))}
+            onDoubleClick={() => setCreateEventModale(true)}
             className="scheduler-content-day-item"
           >
             <span>
@@ -44,10 +49,13 @@ const Day = ({ chosenDay }) => {
               (event) => event.start_time <= dayHour
                               && event.end_time > dayHour && (
                               <div
-                                value={event.start_time}
-                                key={`${event.start_time}`}
-                                style={{ backgroundColor: `${event.color}` }}
+                                value={event.id}
+                                style={{
+                                  backgroundColor: `${event.presta.color}`,
+                                }}
+                                key={`${event.id}`}
                                 className="event"
+                                onClick={() => setEventValue(event.id)}
                               />
               ),
             )}
@@ -60,6 +68,13 @@ const Day = ({ chosenDay }) => {
 
 Day.propTypes = {
   chosenDay: PropTypes.any.isRequired,
+  setEventValue: PropTypes.func.isRequired,
+  setCreateEventModale: PropTypes.func.isRequired,
+  events: PropTypes.array,
+};
+
+Day.defaultProps = {
+  events: [],
 };
 
 export default Day;

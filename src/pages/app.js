@@ -1,7 +1,9 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Header from '../Layout/Header';
-import Footer from '../Layout/Footer';
+import Header from 'src/Layout/Header';
+import Footer from 'src/Layout/Footer';
+import Loader from 'src/components/Loader';
+import AdminPlanning from 'src/containers/admin/planning';
 import Home from './home';
 import Advice from './advice';
 import Appointment from './appointment';
@@ -16,13 +18,11 @@ import ProfilAdmin from './admin/profile';
 import ClientList from './admin/clientList';
 import ClientMap from './admin/clientMap';
 import ClientDetail from './admin/clientDetails';
-import AdminPlanning from './admin/planning';
 import Statistic from './admin/statistics';
 import ChatAdmin from './admin/chat';
 import Contact from './contact';
 import CGU from './cgu';
 import Error from './error';
-import Loader from '../components/Loader';
 
 import 'src/styles/app.scss';
 

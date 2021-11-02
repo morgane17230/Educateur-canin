@@ -1,0 +1,54 @@
+@use "reset";
+@use "vars" as v;
+@use "index";
+
+.event-modal {
+    display: flex;
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(17, 16, 16, 0.692);
+    justify-content: center;
+    &-content {
+        align-self: center;
+        flex-direction: column;
+        border-radius: 20px;
+        padding: 2rem;
+        background-color: white;
+        height: 50vh;
+        width: 50%;
+    }
+    &-header {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: 0.5rem;
+        span {
+            padding: 0.5rem;
+        }
+    }
+
+    &-close {
+        display: flex;
+        align-self: flex-start;
+        background-color: transparent;
+        border: none;
+    }
+    &-form {
+        display: flex;
+        flex-direction: column;
+        height: 30vh;
+        padding: 1rem 0.5rem;
+        &-input {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            margin: 0.5rem 0;
+        }
+        &-button {
+            align-self: center;
+            margin: 1rem 0;
+        }
+    }
+}
