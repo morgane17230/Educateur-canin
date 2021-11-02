@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import events from '../../../data/events.json';
+import events from 'src/data/events.json';
 
 // StyleSheet
 

@@ -8,6 +8,7 @@
     flex-direction: column;
     border-bottom: 1px solid black;
     height: fit-content;
+    padding: .5rem;
     @media (max-width: 640px) {
             display: none;
         }

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import App from 'src/components/App';
+import App from 'src/pages/app';
 
 const mapStateToProps = (state) => ({
   loading: state.global.loading,

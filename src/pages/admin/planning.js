@@ -1,20 +1,18 @@
 /* eslint-disable no-mixed-operators */
 import React, { useState } from 'react';
-import CreateEvent from 'src/containers/BackOffice/Calendar/CreateEvent';
-import DatePicker from './DatePicker';
-import Scheduler from './Scheduler';
-import EventDetails from './EventDetails';
+import DatePicker from 'src/components/Calendar/DatePicker';
+import Scheduler from 'src/components/Calendar/Scheduler';
+import EventDetails from 'src/components/Calendar/EventDetails';
 
-import 'src/styles/calendar.scss';
+import 'src/styles/adminplanning.scss';
 
 // == Composant
-const Calendar = () => {
+const AdminPlanning = () => {
   const [chosenDay, setChosenDay] = useState(new Date());
   const year = new Date(chosenDay).getFullYear();
   const month = new Date(chosenDay).getMonth();
   const [daysInMonth, setDaysInMonth] = useState(0);
   const [date, setDate] = useState(new Date().getDate());
-  const [openCreateModal, setOpenCreateModal] = useState(false);
 
   // Display previous month
 
@@ -41,7 +39,6 @@ const Calendar = () => {
         month={month}
         chosenDay={chosenDay}
         setChosenDay={setChosenDay}
-        setOpenCreateModal={setOpenCreateModal}
       />
       <div className="calendar-right">
         <DatePicker
@@ -55,20 +52,12 @@ const Calendar = () => {
           month={month}
           chosenDay={chosenDay}
           setChosenDay={setChosenDay}
-          setOpenCreateModal={setOpenCreateModal}
         />
-        {openCreateModal ? (
-          <CreateEvent
-            setOpenCreateModal={setOpenCreateModal}
-            chosenDay={chosenDay}
-            setChosenDay={setChosenDay}
-          />
-        ) : (
-          <EventDetails />
-        )}
+
+        <EventDetails />
       </div>
     </div>
   );
 };
 
-export default Calendar;
+export default AdminPlanning;

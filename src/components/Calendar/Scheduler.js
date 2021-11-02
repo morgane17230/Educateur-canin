@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@mdi/react';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
-import Week from 'src/containers/BackOffice/Calendar/Week';
+import Week from 'src/containers/Calendar/Week';
 import Month from './Month';
 import Day from './Day';
 
