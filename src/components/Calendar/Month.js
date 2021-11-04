@@ -83,9 +83,9 @@ const Month = ({
   );
 
   return (
-    <>
+    <div className="scheduler-content">
       <div className="scheduler-content-month">{days.map(dayList)}</div>
-    </>
+    </div>
   );
 };
 

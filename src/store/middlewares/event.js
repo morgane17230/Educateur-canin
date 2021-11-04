@@ -9,7 +9,6 @@ const company = (store) => (next) => async (action) => {
       try {
         const events = await api.get('/events');
         const actionGetEvents = setEvents(events.data);
-        console.log(events.data);
         store.dispatch(actionGetEvents);
       }
       catch (error) {

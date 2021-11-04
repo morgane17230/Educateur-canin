@@ -12,33 +12,9 @@ import 'src/styles/createevent.scss';
 
 const CreateEvent = ({
   chosenDay,
-  changeField,
-  lastName,
-  number,
-  street,
-  postalCode,
-  city,
-  startTime,
-  endTime,
-  prestation,
-  onCreateEvent,
-  onSearchUser,
-  onSelectPrestation,
   setCreateEventModale,
 }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onCreateEvent(chosenDay);
-  };
-
-  const handleOnSearch = (evt) => {
-    onSearchUser(evt.target.value);
-  };
-
-  const handleSelectPrestation = (evt) => {
-    evt.preventDefault();
-    onSelectPrestation(evt.target.value);
-  };
+  console.log(chosenDay);
 
   return (
     <div className="event-modal">
@@ -61,95 +37,27 @@ const CreateEvent = ({
             })}
           </span>
         </div>
-
-        <form
-          method="POST"
-          className="event-modal-form"
-          onSubmit={handleSubmit}
-        >
-          <select
-            className="event-modal-form-input"
-            name="prestation"
-            onChange={handleSelectPrestation}
-            value={prestation}
-          >
-            <option value="">Prestation</option>
-            <option value="1">Prestation1</option>
-            <option value="2">Prestation2</option>
-            <option value="3">Prestation3</option>
-          </select>
-          <label
-            htmlFor="search"
-            title="search"
-            data-title="recherche"
-          />
-          <input
-            required
-            name="search"
-            id="search"
-            type="text"
-            placeholder="Chercher un client"
-            onChange={handleOnSearch}
-          />
-          ou
-          <Field
-            required
-            name="lastName"
-            id={lastName}
-            type="text"
-            placeholder="Entrer un nouveau client"
-            onChange={changeField}
-            value={lastName}
-          />
-          <Field
-            required
-            name="startTime"
-            type="time"
-            placeholder="Heure de début"
-            onChange={changeField}
-            value={startTime}
-          />
-          <Field
-            required
-            name="endTime"
-            type="time"
-            placeholder="Heure de fin"
-            onChange={changeField}
-            value={endTime}
-          />
-          <span>Adresse : </span>
-          <Field
-            required
-            name="number"
-            type="text"
-            placeholder="Numéro de voie"
-            onChange={changeField}
-            value={number}
-          />
-          <Field
-            required
-            name="street"
-            type="text"
-            placeholder="Nom de la voie"
-            onChange={changeField}
-            value={street}
-          />
-          <Field
-            required
-            name="postalCode"
-            type="text"
-            placeholder="Code postal"
-            onChange={changeField}
-            value={postalCode}
-          />
-          <Field
-            required
-            name="city"
-            type="text"
-            placeholder="Ville"
-            onChange={changeField}
-            value={city}
-          />
+        <form method="POST" className="event-modal-form">
+          <div className="event-modal-form-parts">
+            <div className="event-modal-form-part left">
+              <Field
+                required
+                name="lastName"
+                type="text"
+                placeholder="Entrer un nouveau client"
+                value=""
+              />
+            </div>
+            <div className="event-modal-form-part">
+              <Field
+                required
+                name="lastName"
+                type="text"
+                placeholder="Entrer un nouveau client"
+                value=""
+              />
+            </div>
+          </div>
           <button
             type="submit"
             className="event-modal-form-button"
@@ -164,31 +72,12 @@ const CreateEvent = ({
 };
 
 CreateEvent.propTypes = {
-  lastName: PropTypes.string,
-  number: PropTypes.string,
-  street: PropTypes.string,
-  postalCode: PropTypes.string,
-  city: PropTypes.string,
-  startTime: PropTypes.string,
-  endTime: PropTypes.string,
-  prestation: PropTypes.string,
   chosenDay: PropTypes.instanceOf(Date).isRequired,
-  changeField: PropTypes.func.isRequired,
-  onCreateEvent: PropTypes.func.isRequired,
-  onSearchUser: PropTypes.func.isRequired,
-  onSelectPrestation: PropTypes.func.isRequired,
   setCreateEventModale: PropTypes.func.isRequired,
 };
 
 CreateEvent.defaultProps = {
-  lastName: '',
-  number: '',
-  street: '',
-  postalCode: '',
-  city: '',
-  startTime: '',
-  endTime: '',
-  prestation: '',
+
 };
 
 export default CreateEvent;

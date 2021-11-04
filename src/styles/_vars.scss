@@ -1,2 +1,11 @@
-$green : #7CB69E;
-$beige : #DFCFC2;
+// colors
+
+$green: #7cb69e;
+$beige: #dfcfc2;
+$dark-beige-10: darken($beige, 10%);
+$light-beige-10: lighten($beige, 10%);
+$dark-beige-20: darken($beige, 20%);
+$dark-beige-30: darken($beige, 30%);
+$white: white;
+$light-green-30: lighten($green, 30%);
+$dark-grey: lighten(#000, 60%)

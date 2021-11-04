@@ -1,28 +1,38 @@
-@use 'reset';
-@use 'vars' as v;
-@use 'index';
-
+@use "reset";
+@use "vars" as v;
+@use "index";
 
 .datepicker {
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid v.$dark-grey;
     height: fit-content;
-    padding: .5rem;
-    @media (max-width: 640px) {
-            display: none;
+    @media (max-width: 1000px) {
+        display: none;
+    }
+    @media (min-width: 1000px) and (orientation: portrait) {
+           width: 50%;
         }
     &-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid v.$dark-grey;
+        background-color: v.$green;
+        color: v.$light-green-30;
+        font-size: 1.2rem;
+         @media (max-width: 640px) {
+            font-size: 1rem;
+        }
+         @media (min-width: 1000px) and (max-width: 1200px) and (orientation: landscape) {
+        font-size: 1rem;
+    }
         div {
             display: flex;
-                text-align: center;
-                padding: 1rem 0;
-                justify-content: space-between;
-            }
+            text-align: center;
+            padding: 1rem 0;
+            justify-content: space-between;
+        }
         button {
             background-color: transparent;
             border: none;
@@ -48,14 +58,12 @@
             background-color: transparent;
             border: none;
             &.out {
-                color: rgba(0, 0, 0, 0.315);
+                color: v.$dark-grey;
             }
             &.today {
                 background-color: v.$beige;
                 border-radius: 50%;
             }
         }
-       
     }
 }
- 

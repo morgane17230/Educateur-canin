@@ -7,15 +7,13 @@
     width: 100%;
     justify-content: space-evenly;
     background-color: v.$green;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
     bottom: 0;
     position: fixed;
     z-index: 24;
-    -webkit-box-shadow: 5px -4px 15px -3px rgba(0, 0, 0, 0.64);
-    box-shadow: 5px -4px 15px -3px rgba(0, 0, 0, 0.64);
     &-item {
         font-size: small;
-        color: white;
+        color: v.$white;
         font-weight: bold;
     }
 }

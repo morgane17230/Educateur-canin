@@ -5,18 +5,35 @@
 .calendar {
     display: flex;
     width: 100%;
-    height: 93vh;
-    @media (max-width: 640px) {
-            padding: 1rem 0;
-            flex-direction: column;
-        }
+    height: 100vh;
+    padding-top: 3rem;
+    @media (max-width: 1000px) {
+        padding-top: 2rem;
+        flex-direction: column;
+    }
+    @media (min-width: 1000px) and (max-width: 1200px) and (orientation: portrait) {
+        flex-direction: column;
+    }
     &-right {
         display: flex;
         width: 20%;
         flex-direction: column;
-        justify-content: space-between;
-        @media (max-width: 640px) {
+        // justify-content: space-between;
+        @media (max-width: 1000px) {
             width: 100%;
+        }
+
+        @media (min-width: 1000px) and (max-width: 1200px) and (orientation: portrait) {
+            flex-direction: row;
+            width: 100%;
+            -webkit-box-shadow: 5px -1px 8px 5px rgba(0, 0, 0, 0.44);
+            box-shadow: 5px -1px 8px 5px rgba(0, 0, 0, 0.44);
+        }
+        @media (min-width: 1000px) and (max-width: 1200px) and (orientation: landscape) {
+            width: 30%;
+        }
+        @media (min-width: 1200px) and (max-width: 1400px) and (orientation: landscape) {
+            width: 30%;
         }
     }
 }

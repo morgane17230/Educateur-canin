@@ -108,7 +108,7 @@ const DatePicker = ({
           type="button"
           onClick={getPrevMonth}
         >
-          <Icon path={mdiChevronLeft} title="next date" size={1} />
+          <Icon path={mdiChevronLeft} size={1} />
         </button>
         <div>
           {new Date(
@@ -121,7 +121,7 @@ const DatePicker = ({
           type="button"
           onClick={getNextMonth}
         >
-          <Icon path={mdiChevronRight} title="next date" size={1} />
+          <Icon path={mdiChevronRight} size={1} />
         </button>
       </div>
       <div className="datepicker-content-header">

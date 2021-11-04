@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@mdi/react';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
-import Week from 'src/containers/Calendar/Week';
-import CreateEvent from 'src/modals/CreateEvent';
+import CreateEvent from 'src/containers/Calendar/CreateEvent';
+import Week from './Week';
 import Month from './Month';
 import Day from './Day';
 
@@ -140,19 +140,19 @@ const Scheduler = ({
             type="button"
             onClick={getPrevDate}
           >
-            <Icon path={mdiChevronLeft} title="next date" size={1} />
+            <Icon path={mdiChevronLeft} size={1} />
           </button>
 
           {displayWeek && (
           <>
             <div>
               {new Date(weekStart).toLocaleDateString('fr-FR', {
-                month: 'long',
+                month: 'short',
                 year: 'numeric',
               })}{' '}
               -{' '}
               {new Date(weekEnd).toLocaleDateString('fr-FR', {
-                month: 'long',
+                month: 'short',
                 year: 'numeric',
               })}{' '}
             </div>
@@ -195,30 +195,40 @@ const Scheduler = ({
             type="button"
             onClick={getNextDate}
           >
-            <Icon path={mdiChevronRight} title="next date" size={1} />
+            <Icon path={mdiChevronRight} size={1} />
           </button>
         </div>
 
         <div className="scheduler-header-choice">
-          <div aria-label="day" type="button" onClick={onDisplayDay}>
-            Jour
+          <div>
+            <a href="#" aria-label="day" type="button" onClick={onDisplayDay}>
+              Jour
+            </a>
           </div>
-          <div aria-label="week" type="button" onClick={onDisplayWeek}>
-            Semaine
+          <div>
+            <a href="#" aria-label="week" type="button" onClick={onDisplayWeek}>
+              Semaine
+            </a>
           </div>
-          <div
-            aria-label="month"
-            type="button"
-            onClick={onDisplayMonth}
-          >
-            Mois
+          <div>
+            <a
+              href="#"
+              aria-label="month"
+              type="button"
+              onClick={onDisplayMonth}
+            >
+              Mois
+            </a>
           </div>
-          <div
-            aria-label="month"
-            type="button"
-            onClick={() => setChosenDay(new Date())}
-          >
-            Aujourd'hui
+          <div>
+            <a
+              href="#"
+              aria-label="month"
+              type="button"
+              onClick={() => setChosenDay(new Date())}
+            >
+              Aujourd'hui
+            </a>
           </div>
         </div>
       </div>

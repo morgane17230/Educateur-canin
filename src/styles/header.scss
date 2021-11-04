@@ -1,27 +1,32 @@
 @use "reset";
 @use "vars" as v;
 @use "index";
+@use "components" as c;
 
 .header {
     display: flex;
     &-banner {
         display: flex;
         justify-content: space-between;
-        position: relative;
+        position: fixed;
         z-index: 24;
         width: 100%;
         background-color: v.$green;
-        -webkit-box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.64);
-        box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.64);
         span {
             align-self: center;
             font-weight: bold;
             font-size: 2rem;
             padding-left: 1rem;
-            color: lighten(v.$green, 30%);
+            color: v.$light-green-30;
             @media (max-width: 640px) {
                 font-size: 1rem;
             }
+            @media (min-width: 640px) and (max-width: 1000px) {
+                font-size: 1rem;
+            }
+            @media (min-width: 1000px) and (max-width: 1200px) {
+           font-size: 1.2rem;
+        }
         }
         &-logo {
             display: flex;
@@ -31,12 +36,15 @@
                 @media (max-width: 640px) {
                     width: 2rem;
                 }
+                @media (min-width: 640px) and (max-width: 1000px) {
+                    width: 2rem;
+                }
             }
         }
         &-toggle {
             background-color: transparent;
             border: none;
-            color: lighten(v.$green, 30%);
+            color: v.$light-green-30;
             padding: 0 1rem;
         }
     }
@@ -44,21 +52,45 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        position: absolute;
+        position: fixed;
         z-index: 4;
         bottom: 0;
-        background-color: v.$beige;
+        background-color: v.$light-beige-10;
         width: 15%;
         height: 100vh;
         transform: translate(-100%);
         transition: 400ms;
+        -webkit-box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.64);
+        box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.64);
         @media (max-width: 640px) {
-            width: 70%;
+            width: 50%;
+            font-size: 0.8rem;
+        }
+        @media (min-width: 640px) and (max-width: 1000px) {
+            font-size: 0.9rem;
+            padding-top: 3rem;
+            width: 90%;
+            flex-direction: row;
+        }
+        @media (min-width: 640px) and (max-width: 1000px) and(orientation: portrait) {
+            width: 30%;
+        }
+        @media (min-width: 1000px) and (max-width: 1200px) {
+            font-size: 1.5rem;
+            width: 40%;
+        }
+
+        @media (min-width: 1200px) and (max-width: 1400px) and (orientation: landscape) {
+            font-size: 1.2rem;
+            width: 20%;
         }
         &-header {
             padding: 5rem 2rem 1rem 2rem;
             height: 20%;
-            border-bottom: 2px solid white;
+            border-bottom: 2px solid v.$dark-beige-20;
+            @media (min-width: 640px) and (max-width: 1000px) {
+                border: none;
+            }
         }
         &-items {
             height: 60%;
@@ -68,36 +100,27 @@
             width: 100%;
             padding: 1rem 2rem;
             justify-content: flex-start;
-            background-color: v.$beige;
-            color: white;
+            background-color: v.$light-beige-10;
+            color: v.$dark-beige-20;
             font-weight: bold;
             transition: 1500ms;
             &:hover {
                 transition: 200ms;
-                background-color: lighten(v.$beige, 10%);
-                color: darken(v.$beige, 10%);
+                background-color: v.$beige;
+                color: v.$white;
+            }
+            @media (max-width: 640px) {
+                padding: 1rem 1rem;
             }
         }
         &-footer {
-            border-top: 2px solid white;
+            border-top: 2px solid v.$dark-beige-20;
             padding-bottom: 2rem;
             &-actions {
-                margin: 0.5rem;
-                padding: 1rem;
-                border: 2px solid white;
-                border-radius: 20px;
-                background-color: v.$beige;
-                color: white;
-                text-align: center;
-                font-weight: bold;
-                &:hover {
-                    transition: 200ms;
-                    background-color: lighten(v.$beige, 10%);
-                    color: darken(v.$beige, 10%);
-                }
-                @media (max-width: 640px) {
-                    padding: 0.5rem;
-                }
+                @include c.button;
+            }
+            @media (min-width: 640px) and (max-width: 1000px) {
+                border: none;
             }
         }
     }

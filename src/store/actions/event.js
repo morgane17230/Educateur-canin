@@ -10,7 +10,3 @@ export const setEvents = (payload) => ({
   type: SET_EVENTS,
   payload,
 });
-
-export const onCreateEvent = () => ({
-  type: ON_CREATE_EVENT,
-});
