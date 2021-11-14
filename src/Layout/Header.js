@@ -4,6 +4,7 @@ import logo from 'src/assets/logo.png';
 import 'src/styles/header.scss';
 import Icon from '@mdi/react';
 import { mdiMenu } from '@mdi/js';
+import Drawer from './Drawer';
 
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
@@ -29,55 +30,7 @@ const Header = () => {
           <Icon path={mdiMenu} title="next date" size={1} />
         </button>
       </div>
-      <div className={`header-drawer ${isOpen && 'isOpen'}`}>
-        <div className="header-drawer-header">Avatar + Nom</div>
-        <div className="header-drawer-items">
-          <Link className="header-drawer-item" to="/">
-            Accueil
-          </Link>
-
-          <Link className="header-drawer-item" to="/conseils">
-            Conseils
-          </Link>
-
-          <Link
-            className="header-drawer-item"
-            to="/prendre-rendez-vous"
-          >
-            Rendez-vous
-          </Link>
-
-          <Link
-            className="header-drawer-item"
-            to="/foire-aux-questions"
-          >
-            FAQ
-          </Link>
-
-          <Link
-            className="header-drawer-item"
-            to="/que-sont-ils-devenus"
-          >
-            Que sont-ils devenus ?
-          </Link>
-
-          <Link className="header-drawer-item" to="/et-les-chats">
-            Et les chats...
-          </Link>
-        </div>
-        <div className="header-drawer-footer">
-          <a href="#">
-            <div className="header-drawer-footer-actions">
-              Modifier mon profil
-            </div>
-          </a>
-          <a href="#">
-            <div className="header-drawer-footer-actions">
-              Déconnexion
-            </div>
-          </a>
-        </div>
-      </div>
+      <Drawer isOpen={isOpen} />
     </div>
   );
 };

@@ -4,6 +4,7 @@
 
 .input {
     @include c.input;
+    margin-top: 1rem;
     display: flex;
     width: 100%;
     ::placeholder {

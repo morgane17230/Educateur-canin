@@ -14,6 +14,7 @@ const Field = ({
   error,
 }) => {
   const handleChange = (evt) => {
+    console.log(evt.target.value);
     onChange(evt.target.value, name);
   };
 

@@ -4,9 +4,11 @@
 
 .error {
     display: flex;
-    width: 100%;
-    min-height: 85vh;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
     justify-content: center;
+    overflow: hidden;
     &-content {
         display: flex;
         flex-direction: column;
@@ -16,6 +18,9 @@
         padding-top: 5rem;
         div {
             font-size: 2rem;
+        }
+        @media (max-width: 768px) {
+            font-size: 5rem;
         }
     }
 }
@@ -85,6 +90,9 @@
         transform: rotate(-30deg);
         -webkit-animation: walk 3s linear infinite 0.5s;
         animation: walk 3s linear infinite 0.5s;
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
     &-4 {
         opacity: 0;
@@ -94,6 +102,9 @@
         transform: rotate(-20deg);
         -webkit-animation: walk 3s linear infinite 0.75s;
         animation: walk 3s linear infinite 0.75s;
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
     &-5 {
         opacity: 0;
@@ -103,6 +114,7 @@
         transform: rotate(-10deg);
         -webkit-animation: walk 3s linear infinite 1s;
         animation: walk 3s linear infinite 1s;
+       
     }
     &-6 {
         opacity: 0;
@@ -113,6 +125,9 @@
         transform: rotate(10deg);
         -webkit-animation: walk 3s linear infinite 1.25s;
         animation: walk 3s linear infinite 1.25s;
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
     &-7 {
         opacity: 0;
@@ -122,6 +137,9 @@
         transform: rotate(20deg);
         -webkit-animation: walk 3s linear infinite 1.5s;
         animation: walk 3s linear infinite 1.5s;
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
     &-8 {
         opacity: 0;
@@ -131,6 +149,9 @@
         transform: rotate(10deg);
         -webkit-animation: walk 3s linear infinite 1.75s;
         animation: walk 3s linear infinite 1.75s;
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
     &-9 {
         opacity: 0;
@@ -149,6 +170,9 @@
         transform: rotate(10deg);
         -webkit-animation: walk 3s linear infinite 2.25s;
         animation: walk 3s linear infinite 2.25s;
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
     &-11 {
         opacity: 0;
@@ -158,6 +182,9 @@
         transform: rotate(-30deg);
         -webkit-animation: walk 3s linear infinite 2.5s;
         animation: walk 3s linear infinite 2.5s;
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
     &-12 {
         opacity: 0;
@@ -167,6 +194,9 @@
         transform: rotate(20deg);
         -webkit-animation: walk 3s linear infinite 2.75s;
         animation: walk 3s linear infinite 2.75s;
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
     &-13 {
         opacity: 0;
@@ -176,6 +206,9 @@
         transform: rotate(-50deg);
         -webkit-animation: walk 3s linear infinite 3s;
         animation: walk 3s linear infinite 3s;
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
     &-14 {
         opacity: 0;
@@ -185,6 +218,9 @@
         transform: rotate(10deg);
         -webkit-animation: walk 3s linear infinite 3.25s;
         animation: walk 3s linear infinite 3.25s;
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
     &-15 {
         opacity: 0;
@@ -194,6 +230,9 @@
         transform: rotate(-50deg);
         -webkit-animation: walk 3s linear infinite 3.5s;
         animation: walk 3s linear infinite 3.5s;
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
     &-16 {
         opacity: 0;
@@ -203,6 +242,9 @@
         transform: rotate(-10deg);
         -webkit-animation: walk 3s linear infinite 3.75s;
         animation: walk 3s linear infinite 3.75s;
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
 }
 

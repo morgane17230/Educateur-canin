@@ -7,22 +7,7 @@
     flex-direction: column;
     width: 80%;
     border-left: 1px solid v.$dark-grey;
-    @media (max-width: 640px) {
-        width: 100%;
-        font-size: 0.8rem;
-    }
-    @media (min-width: 650px) and (max-width: 1000px) {
-        width: 100%;
-    }
-    @media (min-width: 1000px) and (max-width: 1200px) {
-        width: 70%;
-    }
-    @media (min-width: 1000px) and (max-width: 1200px) and (orientation: portrait) {
-        width: 100%;
-    }
-    @media (min-width: 1000px) and (max-width: 1200px) and (orientation: landscape) {
-        width: 70%;
-    }
+    padding-bottom: 2rem;
     &-header {
         display: flex;
         justify-content: space-evenly;
@@ -32,16 +17,6 @@
         background-color: v.$green;
         color: v.$light-green-30;
         font-size: 1.2rem;
-        @media (max-width: 640px) {
-            flex-direction: column;
-            font-size: 0.8rem;
-        }
-        @media (min-width: 650px) and (max-width: 1000px) {
-            font-size: 0.8rem;
-        }
-        @media (min-width: 1000px) and (max-width: 1200px) and (orientation: landscape) {
-        font-size: 1rem;
-    }
         button {
             background-color: transparent;
             border: none;
@@ -51,9 +26,6 @@
             text-align: center;
             width: 50%;
             justify-content: center;
-            @media (max-width: 640px) {
-                width: 100%;
-            }
             div {
                 padding: 1rem;
             }
@@ -62,9 +34,6 @@
             display: flex;
             width: 50%;
             justify-content: space-evenly;
-            @media (max-width: 640px) {
-                width: 100%;
-            }
             div {
                 display: flex;
                 text-align: center;
@@ -77,15 +46,6 @@
         display: flex;
         height: 100vh;
         overflow-y: scroll;
-        @media (max-width: 640px) {
-            height: 40vh;
-        }
-        @media (min-width: 650px) and (max-width: 1000px) {
-            height: 55vh;
-        }
-        @media (min-width: 1000px) and (max-width: 1200px) and (orientation: portrait) {
-            height: 55vh;
-        }
         &-header {
             display: flex;
             &-item {
@@ -99,20 +59,21 @@
             display: flex;
             flex-direction: column;
             width: 100%;
+            padding-left: 1rem;
             &-item {
-                position: relative;
+                display: flex;
+                justify-content: space-between;
                 width: 100%;
-                padding: 0 1rem 3rem;
                 border-bottom: 1px solid v.$dark-grey;
-                font-size: small;
-                &:hover {
-                    background-color: v.$beige;
-                }
-                span {
-                    position: relative;
-                    z-index: 1;
-                }
             }
+            &-header {
+                padding: 2rem 0;
+            }
+        }
+        &-dayhour {
+            display: flex;
+            flex-direction: column;
+            width: 95%;
         }
         &-month {
             display: flex;
@@ -124,15 +85,6 @@
                 height: 10.5rem;
                 border-bottom: 1px solid v.$dark-grey;
                 border-right: 1px solid v.$dark-grey;
-                @media (max-width: 640px) {
-                    height: 6rem;
-                }
-                @media (min-width: 1000px) and (max-width: 1200px) and (orientation: portrait) {
-                    height: 11vh;
-                }
-                @media (min-width: 1200px) and (max-width: 1400px) and (orientation: landscape) {
-                    height: 18vh;
-                }
                 &:hover {
                     background-color: v.$beige;
                 }
@@ -150,21 +102,23 @@
             flex-direction: column;
             height: fit-content;
             width: calc(100% / 7);
-            &:nth-child(n + 2):hover {
-                background-color: v.$beige;
-            }
         }
         &-item {
-            position: relative;
-            padding: 2rem 0 1rem 0;
+            display: flex;
+            flex-direction: column;
             text-align: center;
             border-bottom: 1px solid v.$dark-grey;
             border-left: 1px solid v.$dark-grey;
-            &:hover {
-                background-color: v.$light-beige-10;
-            }
-            @media (max-width: 1000px) {
-                padding: 1.75rem 0 1rem 0;
+            &-minutes {
+                height: 1em;
+                position: relative;
+                border-bottom: 1px solid rgb(226, 225, 225);
+                &:nth-child(3) {
+                    border: none;
+                }
+                &:hover {
+                    background-color: v.$beige;
+                }
             }
         }
         &-weekdays {
@@ -172,12 +126,6 @@
             border-bottom: 1px solid v.$dark-grey;
             border-left: 1px solid v.$dark-grey;
             padding: 1rem 0 2.5rem 0;
-            @media (max-width: 640px) {
-                height: 4.4rem;
-            }
-            @media (max-width: 1000px) {
-                height: 4.2rem;
-            }
         }
     }
 }

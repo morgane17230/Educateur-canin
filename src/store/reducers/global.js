@@ -7,20 +7,28 @@ import {
   SET_EVENTS,
 } from 'src/store/actions/event';
 
+import {
+  SET_PRESTAS,
+} from 'src/store/actions/presta';
+
 const initialState = {
   lastName: '',
   firstName: '',
-  number: '',
+  housenumber: '',
   street: '',
-  postalCode: '',
+  postcode: '',
   city: '',
-  dayEvent: new Date(),
+  phone: '',
+  email: '',
   startTime: '',
   endTime: '',
+  prestaId: '',
   prestation: '',
   error: {},
   loading: true,
   events: [],
+  prestas: [],
+  userQuery: '',
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -40,6 +48,13 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         ...action.payload,
         events: action.payload,
+        error: {},
+      };
+    case SET_PRESTAS:
+      return {
+        ...state,
+        ...action.payload,
+        prestas: action.payload,
         error: {},
       };
     default:

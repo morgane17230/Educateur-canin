@@ -3,7 +3,7 @@ import api from './api';
 import { ON_GET_EVENTS, setEvents } from '../actions/event';
 import { getError } from '../actions/global';
 
-const company = (store) => (next) => async (action) => {
+const event = (store) => (next) => async (action) => {
   switch (action.type) {
     case ON_GET_EVENTS: {
       try {
@@ -22,4 +22,4 @@ const company = (store) => (next) => async (action) => {
   }
 };
 
-export default company;
+export default event;

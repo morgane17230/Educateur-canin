@@ -1,6 +1,7 @@
 @use "reset";
 @use "vars" as v;
 @use "index";
+@use "components" as c;
 
 .event-modal {
     display: flex;
@@ -14,18 +15,22 @@
         align-self: center;
         flex-direction: column;
         border-radius: 20px;
-        padding: 2rem 0;
+        padding: .5rem;
         background-color: v.$white;
-        height: 50vh;
-        width: 50%;
+        &.create {
+            padding: 2rem;
+            width: 50%;
+            height: fit-content;
+        }
+        &.modify {
+            padding: 2rem;
+            width: 30%;
+            height: 50vh;
+        }
     }
     &-header {
         display: flex;
-        flex-direction: column;
-        text-align: center;
-        span {
-            padding: 0.5rem;
-        }
+        justify-content: center;
     }
 
     &-close {
@@ -42,6 +47,7 @@
         padding: 1rem 0.5rem;
         &-parts {
             display: flex;
+            padding: 1rem;
             justify-content: space-between;
         }
         &-part {
@@ -50,13 +56,16 @@
             justify-content: space-evenly;
             width: 50%;
             padding: 0 2rem;
+            &-title {
+                width: 100%;
+                padding: 1rem 0;
+            }
             &.left {
                 border-right: 1px solid v.$dark-beige-10;
             }
         }
         &-button {
-            align-self: center;
-            margin: 1rem 0;
+            @include c.button;
         }
     }
 }

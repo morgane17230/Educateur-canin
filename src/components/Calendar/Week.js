@@ -14,7 +14,7 @@ const Week = ({
   chosenDay,
   month,
   setChosenDay,
-  setCreateEventModale,
+  setOpenCreateEventModale,
 }) => {
   // week display
 
@@ -26,6 +26,7 @@ const Week = ({
   for (let i = 0; i < 7; i++) {
     for (let h = 8; h <= 18; h++) {
       for (let m = 0; m < 4; m++) {
+        const minutes = [];
         const weekDay = new Date(
           new Date(year, month, currentDate.getDate() + i).setDate(
             new Date(
@@ -38,7 +39,10 @@ const Week = ({
         weekDay.setHours(h);
         weekDay.setMinutes(15 * m);
         weekDay.setUTCSeconds(0);
-        dayHours[i].push(Date.parse(weekDay));
+        for (let l = 0; l < 3; l++) {
+          minutes.push(Date.parse(weekDay) + 60000 * (5 * l));
+        }
+        dayHours[i].push(minutes);
       }
     }
   }
@@ -47,24 +51,35 @@ const Week = ({
     <div
       key={`hour-${index}`}
       className="scheduler-content-item"
-      value={hour}
-      onClick={() => {
-        setChosenDay(new Date(hour));
-      }}
-      onDoubleClick={() => setCreateEventModale(true)}
+      value={hour[0]}
     >
-      {events.map(
-        (event) => event.start_time <= hour
-                  && event.end_time > hour && (
-                  <div
-                    key={`${event.id}`}
-                    style={{ backgroundColor: `${event.presta.color}` }}
-                    className="event"
-                    value={event.id}
-                    onClick={() => setEventValue(event.id)}
-                  />
-        ),
-      )}
+      {hour.map((h) => {
+        const hasEvent = events.filter(
+          (event) => event.start_time <= h && event.end_time > h,
+        );
+        return (
+          <div
+            key={h}
+            value={h}
+            className="scheduler-content-item-minutes"
+            style={
+                            hasEvent.length !== 0
+                              ? {
+                                backgroundColor: `${hasEvent[0].presta.color}`,
+                              }
+                              : {}
+                        }
+            onClick={(e) => {
+              e.preventDefault();
+              setEventValue(
+                hasEvent.length !== 0 ? hasEvent[0].id : null,
+              );
+              setOpenCreateEventModale(hasEvent.length === 0);
+              setChosenDay(new Date(h));
+            }}
+          />
+        );
+      })}
     </div>
   );
 
@@ -72,15 +87,17 @@ const Week = ({
     <div key={`hours-${index}`} className="scheduler-content-hours">
       <div
         key={index}
+        onClick={() => setChosenDay(new Date(dayHour[0][0]))}
         className={`scheduler-content-weekdays
           ${
-              new Date(dayHour[0]).getMonth() === month
-              && new Date(dayHour[0]).getDate() === new Date(chosenDay).getDate()
+              new Date(dayHour[0][0]).getMonth() === month
+              && new Date(dayHour[0][0]).getDate()
+                  === new Date(chosenDay).getDate()
                 ? 'today'
                 : ''
           }`}
       >
-        {new Date(dayHour[0]).toLocaleDateString('fr-FR', {
+        {new Date(dayHour[0][0]).toLocaleDateString('fr-FR', {
           weekday: 'short',
           day: 'numeric',
         })}
@@ -96,7 +113,6 @@ const Week = ({
   }
 
   return (
-
     <div className="scheduler-content">
       <div className="scheduler-content-hours">
         <div className="scheduler-content-header-item">Heures</div>
@@ -121,7 +137,7 @@ Week.propTypes = {
   chosenDay: PropTypes.instanceOf(Date).isRequired,
   setChosenDay: PropTypes.func.isRequired,
   setEventValue: PropTypes.func.isRequired,
-  setCreateEventModale: PropTypes.func.isRequired,
+  setOpenCreateEventModale: PropTypes.func.isRequired,
 };
 
 Week.defaultProps = {

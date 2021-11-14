@@ -10,7 +10,7 @@
         left: 15px;
         line-height: 40px;
         font-size: 14px;
-        color: v.$white;
+        color: v.$green;
         transition: 300ms all;
     }
     .label-before {
@@ -21,21 +21,21 @@
         left: 9px;
     }
     input {
-        width: 100%;
+        width: 100%; 
         line-height: 40px;
         padding: 0 15px;
         box-sizing: border-box;
         font-size: 14px;
-        color: v.$white;
+        color: v.$green;
         border: none;
-        border-bottom: 1px solid v.$white;
+        border-bottom: 1px solid v.$green;
         background-color: transparent;
         @media (max-width: 768px) {
             border: none;
         }
         &:focus {
             outline: 0;
-            border-color: v.$white;
+            border-color: v.$green;
         }
         &:valid + label::before {
             @extend .label-before;
@@ -43,7 +43,7 @@
         }
         &:focus + label::before {
             @extend .label-before;
-            color: v.$white;
+            color: v.$green;
         }
     }
 }

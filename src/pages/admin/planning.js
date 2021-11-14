@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'src/components/Calendar/DatePicker';
 import Scheduler from 'src/components/Calendar/Scheduler';
+import CreateEventModale from 'src/containers/Modals/CreateEventModale';
+import ModifyEventModale from 'src/containers/Modals/ModifyEventModale';
 import EventDetails from 'src/components/Calendar/EventDetails';
 
 import 'src/styles/adminplanning.scss';
@@ -15,6 +17,8 @@ const AdminPlanning = ({ onGetEvents, events }) => {
   const [daysInMonth, setDaysInMonth] = useState(0);
   const [date, setDate] = useState(new Date().getDate());
   const [eventValue, setEventValue] = useState(0);
+  const [openCreateEventModale, setOpenCreateEventModale] = useState(false);
+  const [openModifyEventModale, setOpenModifyEventModale] = useState(false);
 
   useEffect(() => {
     onGetEvents();
@@ -47,6 +51,8 @@ const AdminPlanning = ({ onGetEvents, events }) => {
         setChosenDay={setChosenDay}
         events={events}
         setEventValue={setEventValue}
+        eventValue={eventValue}
+        setOpenCreateEventModale={setOpenCreateEventModale}
       />
       <div className="calendar-right">
         <DatePicker
@@ -62,8 +68,27 @@ const AdminPlanning = ({ onGetEvents, events }) => {
           setChosenDay={setChosenDay}
         />
 
-        <EventDetails events={events} eventValue={eventValue} />
+        <EventDetails
+          events={events}
+          eventValue={eventValue}
+          setOpenModifyEventModale={setOpenModifyEventModale}
+        />
       </div>
+      {openCreateEventModale && (
+        <CreateEventModale
+          events={events}
+          setOpenCreateEventModale={setOpenCreateEventModale}
+          chosenDay={chosenDay}
+          eventValue={eventValue}
+        />
+      )}
+      {openModifyEventModale && (
+        <ModifyEventModale
+          events={events}
+          setOpenModifyEventModale={setOpenModifyEventModale}
+          eventValue={eventValue}
+        />
+      )}
     </div>
   );
 };
