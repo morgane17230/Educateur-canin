@@ -1,5 +1,4 @@
 /* eslint-disable no-mixed-operators */
-/* eslint-disable no-plusplus */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -24,7 +23,7 @@ const Week = ({
   const currentDay = currentDate.getDay();
   const lessDays = currentDay === 0 ? 6 : currentDay - 1;
   for (let i = 0; i < 7; i++) {
-    for (let h = 8; h <= 18; h++) {
+    for (let h = 8; h <= 20; h++) {
       for (let m = 0; m < 4; m++) {
         const minutes = [];
         const weekDay = new Date(
@@ -106,7 +105,7 @@ const Week = ({
     </div>
   );
 
-  for (let h = 8; h <= 18; h++) {
+  for (let h = 8; h <= 20; h++) {
     for (let m = 0; m < 4; m++) {
       dayHoursHeader.push(m === 0 ? `${h}h` : `${h}h${m * 15}`);
     }

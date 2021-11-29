@@ -12,16 +12,24 @@ const Field = ({
   onChange,
   required,
   error,
+  min,
+  max,
+  step,
+  disabled,
 }) => {
   const handleChange = (evt) => {
-    console.log(evt.target.value);
     onChange(evt.target.value, name);
   };
 
   const inputId = `field-${name}`;
 
   return (
-    <div error={error} className={error ? 'error input' : 'input'}>
+    <div
+      error={error}
+      className={`${error ? 'error input' : 'input'} ${
+        disabled ? 'disabled input' : 'input'
+      }`}
+    >
       <input
         required={required}
         value={value}
@@ -30,19 +38,17 @@ const Field = ({
         type={type}
         placeholder={placeholder}
         name={name}
+        min={min}
+        max={max}
+        step={step}
+        disabled={disabled}
       />
       <label
         htmlFor={inputId}
-        title={
-                    error
-                      ? 'Les mots de passe ne correspondent pas'
-                      : placeholder
-                }
+        title={error ? 'Les mots de passe ne correspondent pas' : placeholder}
         data-title={
-                    error
-                      ? 'Les mots de passe ne correspondent pas'
-                      : placeholder
-                }
+          error ? 'Les mots de passe ne correspondent pas' : placeholder
+        }
       />
     </div>
   );
@@ -56,6 +62,10 @@ Field.propTypes = {
   onChange: PropTypes.func.isRequired,
   required: PropTypes.bool,
   error: PropTypes.number,
+  min: PropTypes.string,
+  max: PropTypes.string,
+  step: PropTypes.number,
+  disabled: PropTypes.bool,
 };
 
 Field.defaultProps = {
@@ -63,6 +73,10 @@ Field.defaultProps = {
   required: false,
   placeholder: '',
   error: undefined,
+  min: '',
+  max: '',
+  step: 0,
+  disabled: false,
 };
 
 export default Field;

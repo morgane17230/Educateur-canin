@@ -1,0 +1,24 @@
+@use "reset";
+@use "vars" as v;
+@use "index";
+@use "components" as c;
+
+.toast {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 50;
+  width: 250px;
+  height: 125px;
+  padding: 2rem;
+  justify-content: center;
+  text-align: center;
+  color: v.$green;
+  background-color: lighten(v.$green, 30%);
+  border: 2px solid v.$green;
+  font-weight: bold;
+  font-size: 1rem;
+  -webkit-box-shadow: 5px 5px 15px 5px #b3b3b3;
+  box-shadow: 5px 5px 15px 5px #b3b3b3;
+}

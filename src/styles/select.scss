@@ -1,6 +1,8 @@
 @use "reset";
 @use "vars" as v;
+@use "index";
+@use "components" as c;
 
 .select {
-  border: none;
+  @include c.select;
 }

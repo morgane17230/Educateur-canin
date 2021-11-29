@@ -6,6 +6,7 @@ import Scheduler from 'src/components/Calendar/Scheduler';
 import CreateEventModale from 'src/containers/Modals/CreateEventModale';
 import ModifyEventModale from 'src/containers/Modals/ModifyEventModale';
 import EventDetails from 'src/components/Calendar/EventDetails';
+import ConfirmModale from 'src/containers/Modals/ConfirmModale';
 
 import 'src/styles/adminplanning.scss';
 
@@ -19,6 +20,7 @@ const AdminPlanning = ({ onGetEvents, events }) => {
   const [eventValue, setEventValue] = useState(0);
   const [openCreateEventModale, setOpenCreateEventModale] = useState(false);
   const [openModifyEventModale, setOpenModifyEventModale] = useState(false);
+  const [openConfirmModale, setOpenConfirmModale] = useState(false);
 
   useEffect(() => {
     onGetEvents();
@@ -72,6 +74,7 @@ const AdminPlanning = ({ onGetEvents, events }) => {
           events={events}
           eventValue={eventValue}
           setOpenModifyEventModale={setOpenModifyEventModale}
+          setOpenConfirmModale={setOpenConfirmModale}
         />
       </div>
       {openCreateEventModale && (
@@ -87,6 +90,12 @@ const AdminPlanning = ({ onGetEvents, events }) => {
           events={events}
           setOpenModifyEventModale={setOpenModifyEventModale}
           eventValue={eventValue}
+        />
+      )}
+      {openConfirmModale && (
+        <ConfirmModale
+          eventValue={eventValue}
+          setOpenConfirmModale={setOpenConfirmModale}
         />
       )}
     </div>

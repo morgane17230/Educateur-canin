@@ -10,6 +10,7 @@ const Select = ({
   placeholder,
   onChange,
   required,
+  label,
   datas,
   error,
 }) => {
@@ -38,16 +39,12 @@ const Select = ({
           type="select"
           placeholder={placeholder}
           name={name}
+          label={label}
           onFocus={() => setFocus(true)}
         >
-          <option>Sélectionnez votre option</option>
+          <option>{ label }</option>
           {options}
         </select>
-        <label
-          htmlFor={inputId}
-          title={placeholder}
-          data-title={placeholder}
-        />
       </div>
     </>
   );
@@ -56,6 +53,7 @@ const Select = ({
 Select.propTypes = {
   value: PropTypes.any,
   name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   required: PropTypes.bool,

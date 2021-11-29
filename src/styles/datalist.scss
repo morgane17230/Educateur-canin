@@ -2,8 +2,10 @@
 @use 'vars' as v;
 @use 'components' as c;
 
-.input {
-    @include c.input;
+.datalist {
+  display: flex;
+  flex-direction: column;
+    @include c.datalist;
     margin-top: 1rem;
     display: flex;
     width: 100%;

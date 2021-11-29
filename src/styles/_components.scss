@@ -2,67 +2,164 @@
 @use "vars" as v;
 
 @mixin input {
-    position: relative;
-    label::before {
-        content: attr(title);
-        position: absolute;
-        top: 0;
-        left: 15px;
-        line-height: 40px;
-        font-size: 14px;
-        color: v.$green;
-        transition: 300ms all;
+  position: relative;
+  label::before {
+    content: attr(title);
+    position: absolute;
+    top: 0;
+    left: 15px;
+    line-height: 40px;
+    font-size: 14px;
+    color: v.$green;
+    transition: 300ms all;
+  }
+  .label-before {
+    line-height: 20px;
+    font-size: 12px;
+    top: -10px;
+    padding: 0 6px;
+    left: 9px;
+  }
+  input {
+    width: 100%;
+    line-height: 40px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: v.$green;
+    border: none;
+    border-bottom: 1px solid v.$green;
+    background-color: transparent;
+    @media (max-width: 768px) {
+      border: none;
     }
-    .label-before {
-        line-height: 20px;
-        font-size: 12px;
-        top: -10px;
-        padding: 0 6px;
-        left: 9px;
+    &:focus {
+      outline: 0;
+      border-color: v.$green;
     }
-    input {
-        width: 100%; 
-        line-height: 40px;
-        padding: 0 15px;
-        box-sizing: border-box;
-        font-size: 14px;
-        color: v.$green;
-        border: none;
-        border-bottom: 1px solid v.$green;
-        background-color: transparent;
-        @media (max-width: 768px) {
-            border: none;
-        }
-        &:focus {
-            outline: 0;
-            border-color: v.$green;
-        }
-        &:valid + label::before {
-            @extend .label-before;
-            content: attr(data-title);
-        }
-        &:focus + label::before {
-            @extend .label-before;
-            color: v.$green;
-        }
+    &:valid + label::before {
+      @extend .label-before;
+      content: attr(data-title);
     }
+    &:focus + label::before {
+      @extend .label-before;
+      color: v.$green;
+    }
+  }
+}
+
+@mixin datalist {
+  position: relative;
+  margin-top: 1rem;
+  label::before {
+    content: attr(title);
+    position: absolute;
+    top: 0;
+    left: 15px;
+    line-height: 40px;
+    font-size: 14px;
+    color: v.$green;
+    transition: 300ms all;
+  }
+  .label-before {
+    line-height: 20px;
+    font-size: 12px;
+    top: -10px;
+    padding: 0 6px;
+    left: 9px;
+  }
+  input {
+    width: 100%;
+    line-height: 40px;
+    padding: 0.2rem;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: v.$green;
+    border: none;
+    border-bottom: 1px solid v.$green;
+    background-color: transparent;
+    @media (max-width: 768px) {
+      border: none;
+    }
+    datalist {
+      option {
+        background-color: aqua;
+      }
+    }
+    &:focus + label::before {
+      @extend .label-before;
+      content: attr(data-title);
+    }
+    /* &:focus + label::before {
+      @extend .label-before;
+      color: v.$green;
+    } */
+  }
+}
+
+@mixin select {
+  position: relative;
+  label::before {
+    content: attr(title);
+    position: absolute;
+    top: 0;
+    left: 15px;
+    line-height: 40px;
+    font-size: 14px;
+    color: v.$green;
+    transition: 300ms all;
+  }
+  .label-before {
+    line-height: 20px;
+    font-size: 12px;
+    top: -10px;
+    padding: 0 6px;
+    left: 9px;
+  }
+  select {
+    width: 100%;
+    line-height: 40px;
+    padding: 15px 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: v.$green;
+    border: none;
+    border-bottom: 1px solid v.$green;
+    background-color: transparent;
+    @media (max-width: 768px) {
+      border: none;
+    }
+
+    &:focus {
+      outline: 0;
+      border-color: v.$green;
+    }
+    &:valid + label::before {
+      @extend .label-before;
+      content: attr(data-title);
+    }
+    &:focus + label::before {
+      @extend .label-before;
+      color: v.$green;
+    }
+  }
 }
 
 @mixin button {
-    margin: 0.5rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: 2px solid v.$dark-beige-10;
+  border-radius: 20px;
+  background-color: v.$light-beige-10;
+  color: v.$dark-beige-20;
+  text-align: center;
+  font-weight: bold;
+  &:hover {
+    transition: 200ms;
+    background-color: v.$beige;
+    color: v.$white;
+  }
+  @media (max-width: 640px) {
     padding: 0.5rem;
-    border: 2px solid v.$dark-beige-10;
-    border-radius: 20px;
-    background-color: v.$light-beige-10;
-    color: v.$dark-beige-20;
-    text-align: center;
-    font-weight: bold;
-    &:hover {
-        transition: 200ms;
-        background-color: v.$beige;
-        color: v.$white;
-    }
-    @media (max-width: 640px) {
-        padding: 0.5rem;
-    }
+  }
 }

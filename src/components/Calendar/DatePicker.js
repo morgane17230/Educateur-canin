@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-plusplus */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@mdi/react';
