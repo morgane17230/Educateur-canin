@@ -22,7 +22,7 @@ import ClientDetail from './admin/clientDetails';
 import Statistic from './admin/statistics';
 import ChatAdmin from './admin/chat';
 import Contact from './contact';
-import Editor from '../Modals/Editor';
+import Editor from '../containers/Modals/EditorModale';
 import CGU from './cgu';
 import Error from './error';
 import Toast from '../Modals/Toast';
@@ -92,7 +92,7 @@ const App = ({ validation }) => {
         />
         <Route exact path="/backoffice/messagerie" component={ChatAdmin} />
         <Route exact path="/loader" component={Loader} />
-        <Route exact path="/editor" component={Editor} />
+        <Route exact path="/editeur" component={Editor} />
         <Route path="/page-non-trouvee" component={Error} />
         <Redirect to="/page-non-trouvee" />
       </Switch>

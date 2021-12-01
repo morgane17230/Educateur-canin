@@ -18,6 +18,8 @@ import {
   SET_EVENT_ADDRESS,
 } from 'src/store/actions/user';
 
+import { SET_REPORT_CONTENT } from 'src/store/actions/report';
+
 const initialState = {
   lastname: '',
   firstname: '',
@@ -47,6 +49,8 @@ const initialState = {
   eventLat: '',
   eventLon: '',
   validation: '',
+  reportTitle: '',
+  reportContent: 'coucou',
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -130,6 +134,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         startTime: action.payload,
         error: {},
+      };
+    case SET_REPORT_CONTENT:
+      return {
+        ...state,
+        reportContent: action.payload,
       };
     default:
       return state;
