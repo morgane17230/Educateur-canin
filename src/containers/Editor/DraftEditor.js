@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Editor from 'src/components/Editor/Editor';
+import DraftEditor from 'src/components/Editor/DraftEditor';
 import { setReportContent } from 'src/store/actions/report';
 
 const mapStateToProps = (state) => ({
@@ -13,4 +13,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Editor);
+export default connect(mapStateToProps, mapDispatchToProps)(DraftEditor);

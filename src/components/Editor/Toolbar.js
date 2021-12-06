@@ -42,6 +42,7 @@ const Toolbar = ({
   setBlock,
   setCentered,
   setRemove,
+  setSelected,
   bold,
   italic,
   underline,
@@ -59,8 +60,9 @@ const Toolbar = ({
   unlink,
   centered,
   remove,
+  selected,
 }) => {
-  console.log('toolbar');
+  console.log(selected);
   return (
     <div className="toolbar">
       <div className="line">
@@ -70,7 +72,12 @@ const Toolbar = ({
           data-action="bold"
           data-tag-name="b"
           title="Bold"
-          onClick={() => setBold(!bold)}
+          onClick={() => {
+            setBold(!bold);
+            if (bold) {
+              setSelected(`<strong>${selected}</strong>`);
+            }
+          }}
         >
           <Icon path={mdiFormatBold} color={bold ? 'teal' : ''} size={1} />
         </div>
@@ -85,11 +92,7 @@ const Toolbar = ({
             console.log(e.currentTarget.getAttribute('data-action'));
           }}
         >
-          <Icon
-            path={mdiFormatItalic}
-            color={italic ? 'teal' : ''}
-            size={1}
-          />
+          <Icon path={mdiFormatItalic} color={italic ? 'teal' : ''} size={1} />
         </div>
         <div
           className="btn"
@@ -323,28 +326,12 @@ Toolbar.propTypes = {
   unlink: PropTypes.bool.isRequired,
   centered: PropTypes.bool.isRequired,
   remove: PropTypes.bool.isRequired,
+  selected: PropTypes.any.isRequired,
+  setSelected: PropTypes.func.isRequired,
 };
 
 Toolbar.defaultValue = {
-  /*
-  bold: false,
-  italic: false,
-  underline: false,
-  strike: false,
-  justifyLeft: false,
-  justifyRight: false,
-  block: false,
-  orderedList: false,
-  unorderedList: false,
-  outdent: false,
-  indent: false,
-  insertHorizontalRule: false,
-  undo: false,
-  link: false,
-  unlink: false,
-  centered: false,
-  remove: false,
- */
+  selected: ['', {}],
 };
 
 export default Toolbar;

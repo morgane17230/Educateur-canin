@@ -1,58 +1,57 @@
-@use "reset";
 @use "vars" as v;
 @use "index";
 
 .datepicker {
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid v.$dark-grey;
-    height: 50vh;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid v.$dark-grey;
+  height: 50vh;
 
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid v.$dark-grey;
+    background-color: v.$green;
+    color: v.$light-green-30;
+    font-size: 1.2rem;
+    div {
+      display: flex;
+      text-align: center;
+      padding: 1rem 0;
+      justify-content: space-between;
+    }
+    button {
+      background-color: transparent;
+      border: none;
+    }
+  }
+  &-content {
+    display: flex;
+    flex-wrap: wrap;
     &-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid v.$dark-grey;
-        background-color: v.$green;
-        color: v.$light-green-30;
-        font-size: 1.2rem;
-        div {
-            display: flex;
-            text-align: center;
-            padding: 1rem 0;
-            justify-content: space-between;
-        }
-        button {
-            background-color: transparent;
-            border: none;
-        }
+      display: flex;
+      padding: 1rem 0;
+      div {
+        width: calc(100% / 7);
+        text-align: center;
+      }
     }
-    &-content {
-        display: flex;
-        flex-wrap: wrap;
-        &-header {
-            display: flex;
-            padding: 1rem 0;
-            div {
-                width: calc(100% / 7);
-                text-align: center;
-            }
-        }
-        &-item {
-            display: flex;
-            width: calc(100% / 7);
-            justify-content: center;
-            height: calc(40vh / 7);
-            align-items: center;
-            background-color: transparent;
-            border: none;
-            &.out {
-                color: v.$dark-grey;
-            }
-            &.today {
-                background-color: v.$beige;
-                border-radius: 50%;
-            }
-        }
+    &-item {
+      display: flex;
+      width: calc(100% / 7);
+      justify-content: center;
+      height: calc(40vh / 7);
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      &.out {
+        color: v.$dark-grey;
+      }
+      &.today {
+        background-color: v.$beige;
+        border-radius: 50%;
+      }
     }
+  }
 }
