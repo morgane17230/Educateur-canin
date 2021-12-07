@@ -50,7 +50,7 @@ const initialState = {
   eventLon: '',
   validation: '',
   reportTitle: '',
-  reportContent: {},
+  reportContent: 'coucou',
 };
 
 const reducer = (state = initialState, action = {}) => {

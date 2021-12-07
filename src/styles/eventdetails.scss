@@ -1,38 +1,39 @@
+@use "reset";
 @use "vars" as v;
 @use "index";
 @use "components" as c;
 
 .event-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: 50vh;
-  &-header {
-    text-align: center;
-    background-color: v.$beige;
-    padding: 1.3rem;
-    color: v.$dark-beige-30;
-    font-size: 1.2rem;
-  }
-  &-content {
-    height: 30vh;
-    padding: 0 1.5rem;
-    &-item {
-      display: flex;
-      height: 3rem;
-      align-items: center;
-      div {
-        width: 30%;
-      }
-    }
-  }
-  &-buttons {
     display: flex;
-    justify-content: space-evenly;
-    padding-bottom: 2rem;
-    a {
-      @include c.button;
-      width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 50vh;
+    &-header {
+        text-align: center;
+        background-color: v.$beige;
+        padding: 1.3rem;
+        color: v.$dark-beige-30;
+        font-size: 1.2rem;
     }
-  }
+    &-content {
+        height: 30vh;
+        padding: 0 1.5rem;
+        &-item {
+            display: flex;
+            height: 3rem;
+            align-items: center;
+            div {
+                width: 30%;
+            }
+        }
+    }
+    &-buttons {
+        display: flex;
+        justify-content: space-evenly;
+        padding-bottom: 2rem;
+        a {
+            @include c.button;
+            width: 100%;
+        }
+    }
 }

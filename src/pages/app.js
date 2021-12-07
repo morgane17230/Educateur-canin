@@ -27,7 +27,7 @@ import CGU from './cgu';
 import Error from './error';
 import Toast from '../Modals/Toast';
 
-import 'src/styles/app.scss';
+import 'src/styles/index.scss';
 
 // == Composant
 const App = ({ validation }) => {

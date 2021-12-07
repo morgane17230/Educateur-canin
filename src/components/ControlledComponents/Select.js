@@ -29,7 +29,6 @@ const Select = ({
 
   return (
     <>
-      <hr className="rule" />
       <div error={error} className={`${error ? 'error input' : 'select'} ${focus ? 'active' : ''}`}>
         <select
           required={required}

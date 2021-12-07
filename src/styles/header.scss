@@ -1,141 +1,142 @@
+@use "reset";
 @use "vars" as v;
 @use "index";
 @use "components" as c;
 
 .header {
-  display: flex;
-  &-banner {
     display: flex;
-    justify-content: space-between;
-    position: fixed;
-    z-index: 24;
-    width: 100%;
-    background-color: v.$green;
-    span {
-      align-self: center;
-      font-weight: bold;
-      font-size: 2rem;
-      padding-left: 1rem;
-      color: v.$light-green-30;
-      @media (max-width: 768px) {
-        font-size: 1.2rem;
-      }
-    }
-    &-logo {
-      display: flex;
-      &-image {
+    &-banner {
         display: flex;
-        width: 3rem;
-        @media (max-width: 768px) {
-          width: 2rem;
+        justify-content: space-between;
+        position: fixed;
+        z-index: 24;
+        width: 100%;
+        background-color: v.$green;
+        span {
+            align-self: center;
+            font-weight: bold;
+            font-size: 2rem;
+            padding-left: 1rem;
+            color: v.$light-green-30;
+            @media (max-width: 768px) {
+                font-size: 1.2rem;
+            }
         }
-      }
+        &-logo {
+            display: flex;
+            &-image {
+                display: flex;
+                width: 3rem;
+                @media (max-width: 768px) {
+                    width: 2rem;
+                }
+            }
+        }
+        &-toggle {
+            background-color: transparent;
+            border: none;
+            color: v.$light-green-30;
+            padding: 0 1rem;
+        }
     }
-    &-toggle {
-      background-color: transparent;
-      border: none;
-      color: v.$light-green-30;
-      padding: 0 1rem;
-    }
-  }
-  &-drawer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
-    z-index: 4;
-    bottom: 0;
-    background-color: v.$light-beige-10;
-    width: 15em;
-    height: 100vh;
-    transform: translate(-100%);
-    transition: 400ms;
-    font-size: 1rem;
-    padding-top: 3em;
-    -webkit-box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.64);
-    box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.64);
-    @media (max-width: 900px) and (orientation: landscape) {
-      width: 80%;
-      font-size: 0.8rem;
-      flex-direction: row;
-    }
-    &-header {
-      display: flex;
-      height: 15vh;
-      padding: 1em;
-      justify-content: space-around;
-      border-bottom: 1px solid v.$dark-beige-20;
-      @media (max-width: 900px) and (orientation: landscape) {
+    &-drawer {
+        display: flex;
         flex-direction: column;
-        height: 50vh;
-        border: none;
-        position: absolute;
-        right: 2em;
-        top: 2em;
-        order: 2;
-      }
-    }
-    &-avatar {
-      background-color: white;
-      border-radius: 50%;
-      width: 4rem;
-      height: 4rem;
-      border: 2px solid v.$dark-beige-20;
-      align-self: center;
-      @media (max-width: 900px) and (orientation: landscape) {
-        align-self: center;
-      }
-    }
-    &-user {
-      align-self: center;
-    }
-    &-items {
-      height: 60%;
-      @media (max-width: 900px) and (orientation: landscape) {
-        height: 100vh;
-        width: 60%;
-        align-self: center;
-        margin-top: 4rem;
-        order: 1;
-      }
-    }
-    &-item {
-      display: flex;
-      width: 100%;
-      padding: 1rem 2rem;
-      justify-content: flex-start;
-      background-color: v.$light-beige-10;
-      color: v.$dark-beige-20;
-      font-weight: bold;
-      transition: 1500ms;
-      &:hover {
-        transition: 200ms;
-        background-color: v.$beige;
-        color: v.$white;
-      }
-      @media (max-width: 900px) and (orientation: landscape) {
-        font-size: 1em;
-        border-radius: 0 50px 50px 0;
-      }
-    }
-    &-footer {
-      border-top: 1px solid v.$dark-beige-20;
-      padding-bottom: 2rem;
-      @media (max-width: 900px) and (orientation: landscape) {
-        border: none;
-        position: absolute;
+        justify-content: space-between;
+        position: fixed;
+        z-index: 4;
         bottom: 0;
-        right: 0;
-        order: 3;
-      }
-      &-actions {
-        @include c.button;
-      }
+        background-color: v.$light-beige-10;
+        width: 15em;
+        height: 100vh;
+        transform: translate(-100%);
+        transition: 400ms;
+        font-size: 1rem;
+        padding-top: 3em;
+        -webkit-box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.64);
+        box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.64);
+        @media (max-width: 900px) and (orientation: landscape) {
+            width: 80%;
+            font-size: 0.8rem;
+            flex-direction: row;
+        }
+        &-header {
+            display: flex;
+            height: 15vh;
+            padding: 1em;
+            justify-content: space-around;
+            border-bottom: 1px solid v.$dark-beige-20;
+            @media (max-width: 900px) and (orientation: landscape) {
+                flex-direction: column;
+                height: 50vh;
+                border: none;
+                position: absolute;
+                right: 2em;
+                top: 2em;
+                order: 2;
+            }
+        }
+        &-avatar {
+            background-color: white;
+            border-radius: 50%;
+            width: 4rem;
+            height: 4rem;
+            border: 2px solid v.$dark-beige-20;
+            align-self: center;
+            @media (max-width: 900px) and (orientation: landscape) {
+                align-self: center;
+            }
+        }
+        &-user {
+            align-self: center;
+        }
+        &-items {
+            height: 60%;
+            @media (max-width: 900px) and (orientation: landscape) {
+                height: 100vh;
+                width: 60%;
+                align-self: center;
+                margin-top: 4rem;
+                order: 1;
+            }
+        }
+        &-item {
+            display: flex;
+            width: 100%;
+            padding: 1rem 2rem;
+            justify-content: flex-start;
+            background-color: v.$light-beige-10;
+            color: v.$dark-beige-20;
+            font-weight: bold;
+            transition: 1500ms;
+            &:hover {
+                transition: 200ms;
+                background-color: v.$beige;
+                color: v.$white;
+            }
+            @media (max-width: 900px) and (orientation: landscape) {
+                font-size: 1em;
+                border-radius: 0 50px 50px 0;
+            }
+        }
+        &-footer {
+            border-top: 1px solid v.$dark-beige-20;
+            padding-bottom: 2rem;
+            @media (max-width: 900px) and (orientation: landscape) {
+                border: none;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                order: 3;
+            }
+            &-actions {
+                @include c.button;
+            }
+        }
     }
-  }
 }
 
 .isOpen {
-  transform: translate(0);
-  transition: 400ms;
+    transform: translate(0);
+    transition: 400ms;
 }

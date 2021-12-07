@@ -1,3 +1,4 @@
+@use "reset";
 @use "vars" as v;
 @use "index";
 @use "components" as c;
@@ -6,51 +7,22 @@
   width: 100%;
   height: 100%;
   border-top: 6px solid #4a4a4a;
-  border: 1px solid black;
-  border-radius: 3px;
+  border: 1px solid v.$green;
+  border-radius: 0 0 20px 20px;
   margin: 2rem;
-  .toolbar {
-    border: 1px solid black;
-
-    .line {
-      display: flex;
-      border-bottom: 1px solid #e2e2e2;
-
-      &:last-child {
-        border-bottom: none;
-      }
-      .btn {
-        display: flex;
-        align-items: center;
-        padding: 0.5rem;
-        justify-content: center;
-        position: relative;
-        transition: 0.2s ease all;
-      }
-    }
-  }
 }
 
-.content-area {
-  padding: 15px 12px;
-  line-height: 1.5;
+.DraftEditor-editorContainer {
+  height: 50vh;
+}
 
-  .visuell-view {
-    outline: none;
-    width: 100%;
-    height: 50vh;
-
-    p {
-      margin: 12px 0;
-    }
-  }
-
-  .html-view {
-    outline: none;
-    display: none;
-    width: 100%;
-    height: 200px;
+.rdw-editor-toolbar {
+  background-color: v.$light-green-20;
+  .rdw-option-wrapper {
+    background-color: v.$light-green-20;
     border: none;
-    resize: none;
+    &.rdw-option-active {
+      background-color: v.$green;
+    }
   }
 }

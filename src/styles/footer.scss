@@ -1,18 +1,19 @@
+@use "reset";
 @use "vars" as v;
 @use "index";
 
 .footer {
-  display: flex;
-  width: 100%;
-  justify-content: space-evenly;
-  background-color: v.$green;
-  padding: 0.5rem 0;
-  bottom: 0;
-  position: fixed;
-  z-index: 3;
-  &-item {
-    font-size: small;
-    color: v.$white;
-    font-weight: bold;
-  }
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    background-color: v.$green;
+    padding: 0.5rem 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 3;
+    &-item {
+        font-size: small;
+        color: v.$white;
+        font-weight: bold;
+    }
 }

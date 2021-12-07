@@ -1,14 +1,16 @@
+@use "reset";
 @use "vars" as v;
 @use "index";
 
 .calendar {
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  padding-top: 3rem;
-  &-right {
     display: flex;
-    width: 20%;
-    flex-direction: column;
-  }
+    width: 100%;
+    height: 100vh;
+    padding-top: 3rem;
+    &-right {
+        display: flex;
+        width: 20%;
+        flex-direction: column;
+   
+    }
 }
